@@ -16,6 +16,7 @@
 .general-menu-frame .frame-top-line {
     width: 100%;
     background: #F9F8FA;
+    color: #043169;
 }
 
 .general-menu-frame .frame-side-line {
@@ -29,9 +30,14 @@
 
 .frame-side-line .icon {
     padding-top: 1.5rem;
-    /*padding-bottom: .5rem;*/
 }
 
 .main {
 
+}
+
+.main .dashboard {
+    width: 100%;
+    height: 100vh;
+    background: #E8EBF5;
 }
