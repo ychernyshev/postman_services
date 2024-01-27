@@ -16,23 +16,23 @@ class LetterItemModel(models.Model):
     date_of_receipt = models.DateField(auto_now_add=True)
     expired_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self._is_court_subpoena = self.is_court_subpoena
-
-    # def save(self, *args, **kwargs):
-    #     if not self._is_court_subpoena and self.is_court_subpoena:
-    #         self.expired_date = datetime.date.today() + timedelta(days=3)
-        # else:
-        #     self.expired_date = datetime.date.today() + timedelta(days=30)
-        # super().save(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._is_court_subpoena = self.is_court_subpoena
 
     def save(self, *args, **kwargs):
-        if self.is_court_subpoena and self.expired_date is None:
-            self.expired_date = datetime.date.today() + timedelta(days=30)
-        elif not self.is_court_subpoena and self.expired_date is None:
+        if not self._is_court_subpoena and self.is_court_subpoena:
             self.expired_date = datetime.date.today() + timedelta(days=3)
+        else:
+            self.expired_date = datetime.date.today() + timedelta(days=30)
         super().save(*args, **kwargs)
+
+    # def save(self, *args, **kwargs):
+    #     if self.is_court_subpoena and self.expired_date is None:
+    #         self.expired_date = datetime.date.today() + timedelta(days=30)
+    #     elif not self.is_court_subpoena and self.expired_date is None:
+    #         self.expired_date = datetime.date.today() + timedelta(days=3)
+    #     super().save(*args, **kwargs)
 
     # def return_date_time(self):
     #     now = datetime.date.today()
