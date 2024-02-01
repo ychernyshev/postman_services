@@ -19,7 +19,7 @@ class RecipientAdmin(admin.ModelAdmin):
 @admin.register(LetterItemModel)
 class LetterItemAdmin(admin.ModelAdmin):
     list_display = ['track_number', 'is_court', 'is_court_subpoena',
-                    'is_police_subpoena', 'date_of_receipt', 'expired_date']
+                    'is_police_fine', 'date_of_receipt', 'expired_date']
     list_display_links = ['track_number']
     change_list = ['is_court', 'is_court_subpoena', 'is_police_subpoena']
     prepopulated_fields = {'slug': ('track_number', )}

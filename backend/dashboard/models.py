@@ -1,20 +1,24 @@
-import datetime
+import django
+
 from datetime import timedelta
+from django.utils.timezone import localdate
+from django.template.defaultfilters import slugify
 
 from django.db import models
-from django.template.defaultfilters import slugify
 
 
 # Create your models here.
+
+
 class LetterItemModel(models.Model):
     track_number = models.CharField(max_length=13)
     slug = models.SlugField(max_length=13, unique=True, blank=True)
     address = models.ForeignKey('RecipientModel', db_index=True, on_delete=models.PROTECT)
     is_court = models.BooleanField(default=False)
     is_court_subpoena = models.BooleanField(default=False)
-    is_police_subpoena = models.BooleanField(default=False)
+    is_police_fine = models.BooleanField(default=False)
     date_of_receipt = models.DateField(auto_now_add=True)
-    expired_date = models.DateTimeField(default=datetime.datetime.now, blank=True)
+    expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,14 +26,23 @@ class LetterItemModel(models.Model):
 
     def save(self, *args, **kwargs):
         if not self._is_court_subpoena and self.is_court_subpoena:
-            self.expired_date = datetime.date.today() + timedelta(days=3)
+            self.expired_date = localdate() + timedelta(days=3)
         else:
-            self.expired_date = datetime.date.today() + timedelta(days=30)
+            self.expired_date = localdate() + timedelta(days=30)
         super().save(*args, **kwargs)
+
+        self.slug = slugify(self.track_number)
+        super(LetterItemModel, self).save(*args, **kwargs)
+
+    def expired_time(self):
+        return localdate() - self.expired_date
+
+    def returning_day(self):
+        return self.expired_date == localdate()
 
     # def save(self, *args, **kwargs):
     #     if self.is_court_subpoena and self.expired_date is None:
-    #         self.expired_date = datetime.date.today() + timedelta(days=30)
+    #         self.expired_date = datetime.date.  today() + timedelta(days=30)
     #     elif not self.is_court_subpoena and self.expired_date is None:
     #         self.expired_date = datetime.date.today() + timedelta(days=3)
     #     super().save(*args, **kwargs)
@@ -53,6 +66,7 @@ class LetterItemModel(models.Model):
                 f'{self.is_police_subpoena}')
 
     class Meta:
+        ordering = ['-date_of_receipt']
         verbose_name = 'letter'
         verbose_name_plural = 'Letters'
 

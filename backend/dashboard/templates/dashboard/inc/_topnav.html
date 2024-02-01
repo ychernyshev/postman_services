@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Postman Services</a>
+        <a class="navbar-brand" href="{% url 'dashboard:dashboard' %}">
+            <h3>Postman Services</h3>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,12 +10,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item p-4">
-                    <a class="nav-link active" aria-current="page" href="#">Архів листів</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'dashboard:dashboard' %}">Головна панель</a>
+                </li>
+                <li class="nav-item p-4">
+                    <a class="nav-link active" aria-current="page" href="{% url 'dashboard:letters_archive' %}">Архів листів</a>
                 </li>
                 <li class="nav-item p-4" style="border-right: .2rem">
-                    <a class="nav-link active" aria-current="page" href="#">Додати лист</a>
+                    <a class="btn btn-outline-info right-angle" aria-current="page" href="{% url 'dashboard:add_letter' %}">
+                        <strong>Додати лист</strong>
+                    </a>
                 </li>
             </ul>
         </div>
+        <div></div>
     </div>
 </nav>
