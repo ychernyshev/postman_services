@@ -14,7 +14,14 @@
     <tbody>
     {% for item in letters %}
         <tr>
-            <td>{{ item.track_number }}</td>
+            <td>
+                <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
+                   class="btn button-light right-angle"
+                   title="Відстежити"
+                   target="_blank">
+                    {{ item.track_number }}
+                </a>
+            </td>
             <td class="d-flex flex-row">
                 {% if not item.is_court %}
                     <div class="alert alert-secondary right-angle" role="alert">
@@ -73,6 +80,10 @@
                         Лист повернуто
                     </span></h5>
                 {% endif %}
+            </td>
+            <td>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq3KKxatmkx5h29Eilsm2Myj78RjMqgMOvv71gY7N6z1YrS-2C2N9IHGS2V5HXgejTXUk&usqp=CAU" class="img-thumbnail right-angle" alt="..." width="100">
+<!--                <a href="{{ item.letter_image }}" class="btn button-light right-angle" target="_blank">{{ item.track_number }}</a>-->
             </td>
         </tr>
     {% endfor %}

@@ -46,4 +46,8 @@ class AddLetterForm(forms.Form):
                                         widget=forms.CheckboxInput(attrs={
                                             'class': 'form-check-input right-angle media-input'
                                         }))
+    letter_image = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Адреса фото',
+    }))
 
