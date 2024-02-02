@@ -1,6 +1,6 @@
 import django
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.utils.timezone import localdate
 from django.template.defaultfilters import slugify
 
@@ -25,20 +25,17 @@ class LetterItemModel(models.Model):
         self._is_court_subpoena = self.is_court_subpoena
 
     def save(self, *args, **kwargs):
+        self.slug = slugify(self.track_number)
+
         if not self._is_court_subpoena and self.is_court_subpoena:
-            self.expired_date = localdate() + timedelta(days=3)
+            self.expired_date = django.utils.timezone.now() + timedelta(days=3)
         else:
-            self.expired_date = localdate() + timedelta(days=30)
+            self.expired_date = django.utils.timezone.now() + timedelta(days=30)
         super().save(*args, **kwargs)
 
-        self.slug = slugify(self.track_number)
-        super(LetterItemModel, self).save(*args, **kwargs)
-
     def expired_time(self):
-        return localdate() - self.expired_date
-
-    def returning_day(self):
-        return self.expired_date == localdate()
+        ex_time = self.expired_date.date() - datetime.today().date()
+        return ex_time.days
 
     # def save(self, *args, **kwargs):
     #     if self.is_court_subpoena and self.expired_date is None:
@@ -63,7 +60,7 @@ class LetterItemModel(models.Model):
                 f'{self.track_number} | '
                 f'{self.is_court} | '
                 f'{self.is_court_subpoena} | '
-                f'{self.is_police_subpoena}')
+                f'{self.is_police_fine}')
 
     class Meta:
         ordering = ['-date_of_receipt']

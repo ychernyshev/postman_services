@@ -21,5 +21,5 @@ class LetterItemAdmin(admin.ModelAdmin):
     list_display = ['track_number', 'is_court', 'is_court_subpoena',
                     'is_police_fine', 'date_of_receipt', 'expired_date']
     list_display_links = ['track_number']
-    change_list = ['is_court', 'is_court_subpoena', 'is_police_subpoena']
+    change_list = ['is_court', 'is_court_subpoena', 'is_police_fine']
     prepopulated_fields = {'slug': ('track_number', )}

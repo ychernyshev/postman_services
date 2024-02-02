@@ -1,7 +1,13 @@
 <div class="p-3">
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+    <form class="col-lg-12 col-sm-12 cl-12 form-inline my-2 my-lg-0 mx-auto"
+          action="{% url 'dashboard:search_results' %}"
+          method="get">
+        <div class="d-flex flex-row">
+            {{ search_form.query }}
+            <button class="btn button-success my-2 my-sm-0 right-angle outline mobile-text" type="submit">
+                Пошук листа
+            </button>
+        </div>
     </form>
-    <hr />
+    <hr/>
 </div>

@@ -14,6 +14,14 @@
             {% include 'dashboard/inc/_sidenav.html' %}
         </div>
         <div style="height: 98vh; background: #F7F8FA" class="col-lg-10">
+            {% if messages %}
+                {% for message in messages %}
+                    <div {% if message.tags %}
+                        class="alert alert-{{ message.tags }} right-angle"{% endif %} role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
     </div>

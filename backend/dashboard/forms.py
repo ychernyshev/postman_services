@@ -5,6 +5,13 @@ from django import forms
 from .models import RecipientModel
 
 
+class SearchForm(forms.Form):
+    query = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control mr-sm-2 right-angle outline media-input',
+        'placeholder': 'Номер відстеження', 'aria-label': 'search'
+    }))
+
+
 class AddLetterDateField(forms.DateInput):
     input_type = 'date'
 
