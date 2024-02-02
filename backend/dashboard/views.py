@@ -1,8 +1,8 @@
 from django.db.models import Q
 from django.contrib import messages
-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 from .models import LetterItemModel
 from .forms import AddLetterForm, SearchForm
@@ -33,9 +33,13 @@ def index(request):
 
 def letters_archive(request):
     letters = LetterItemModel.objects.all()
+    letters_paginator = Paginator(letters, 20)
+    letters_number = request.GET.get('page')
+    letters_numbers = letters_paginator.get_page(letters_number)
 
     context = {
         'letters': letters,
+        'letters_numbers': letters_numbers,
     }
 
     return render(request, 'dashboard/letters_archive.html', context=context)
