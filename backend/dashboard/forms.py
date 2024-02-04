@@ -24,7 +24,7 @@ class AddLetterForm(forms.Form):
     address = forms.ModelChoiceField(label='', empty_label='отримувач',
                                      queryset=RecipientModel.objects.all(),
                                      widget=forms.Select(attrs={
-                                         'class': 'form-class'
+                                         'class': 'form-control'
                                      }))
     date_of_receipt = forms.DateField(widget=AddLetterDateField(attrs={
         'class': 'form-control right-angle media-input',
