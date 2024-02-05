@@ -12,10 +12,7 @@
 <body class="h-100">
     {% include 'dashboard/inc/_topnav.html' %}
     <div class="row">
-        <div class="col-lg-2">
-            {% include 'dashboard/inc/_sidenav.html' %}
-        </div>
-        <div style="height: 98vh; background: #F7F8FA" class="col-lg-10">
+        <div style="height: 98vh; background: #F7F8FA" class="col-lg-12">
             {% if messages %}
                 {% for message in messages %}
                     <div {% if message.tags %}

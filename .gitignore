@@ -3,6 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 venv/
+backend/venv/
 
 #Visual Studio Gitignore List
 # User-specific files
@@ -483,7 +484,7 @@ celerybeat-schedule
 .env
 
 # virtualenv
-venv/
+backend/venv/
 ENV/
 
 # Spyder project settings

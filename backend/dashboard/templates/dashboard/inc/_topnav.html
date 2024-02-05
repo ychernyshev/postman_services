@@ -21,7 +21,14 @@
                     </a>
                 </li>
             </ul>
+            <form action="{% url 'dashboard:search_results' %}" method="get">
+                <div class="d-flex flex-row">
+                    {{ search_form.query }}
+                    <button class="btn button-success my-2 my-sm-0 right-angle outline mobile-text" type="submit">
+                        Пошук листа
+                    </button>
+                </div>
+            </form>
         </div>
-        <div></div>
     </div>
 </nav>
