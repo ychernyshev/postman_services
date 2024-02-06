@@ -17,7 +17,8 @@ class LetterItemModel(models.Model):
     is_court = models.BooleanField(default=False)
     is_court_subpoena = models.BooleanField(default=False)
     is_police_fine = models.BooleanField(default=False)
-    letter_image = models.CharField(max_length=100, blank=True)
+    letter_image_url = models.CharField(max_length=85, blank=True)
+    letter_image_id = models.CharField(max_length=40, blank=True)
     date_of_receipt = models.DateField(auto_now_add=True)
     expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 

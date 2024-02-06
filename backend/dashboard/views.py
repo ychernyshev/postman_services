@@ -46,10 +46,7 @@ def letters_archive(request):
 
 
 def add_letter(request):
-    letters = LetterItemModel.objects.all()
-    letters_paginator = Paginator(letters, 3)
-    letters_number = request.GET.get('page')
-    letters_numbers = letters_paginator.get_page(letters_number)
+    letters = LetterItemModel.objects.all()[:1]
 
     if request.method == 'POST':
         form = AddLetterForm(request.POST)
@@ -66,7 +63,6 @@ def add_letter(request):
     context = {
         'form': form,
         'letters': letters,
-        'letters_numbers': letters_numbers,
     }
 
     return render(request, 'dashboard/add_letter.html', context=context)
