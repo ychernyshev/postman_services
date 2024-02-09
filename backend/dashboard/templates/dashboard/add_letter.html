@@ -1,4 +1,5 @@
 {% extends 'dashboard/_base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="row">
@@ -142,40 +143,42 @@
                                         </td>
                                     </tr>
                                     <tr>
-
-                                        {% if item.expired_time <= 3 and item.expired_time > 0 %}
-                                        <td class="border border-0">
-                                            <div class="alert alert-warning" role="alert">
-                                                Закінчується термін збереження листа. Залишок днів:
+                                        <td colspan="2" class="border border-0">
+                                            {% if 0 < item.expired_time and item.expired_time <= 3 %}
+                                                <div class="d-flex justify-center p-2 bg-warning">
+                                                    <strong>Закінчується термін збереження листа</strong>
+                                                </div>
+                                            {% elif item.expired_time == 0 %}
+                                                <h5>
+                                                    <span class="badge bg-secondary right-angle">
+                                                            Сьогодні лист повертається
+                                                        </span>
+                                                </h5>
+                                            {% elif item.expired_time < 0 %}
+                                                <h5>
+                                                    <span class="text-warning">
+                                                            Лист повернуто
+                                                        </span>
+                                                </h5>
+                                            {% endif %}
+                                            <div class="alert alert-info right-angle" role="alert">
+                                                Залишок днів збереження:
                                                 <strong>{{ item.expired_time }}</strong>
                                             </div>
-                                        </td>
-                                        {% elif item.expired_time == 0 %}
-                                        <td class="border border-0">
-                                            <h5><span class="badge bg-secondary right-angle">
-                                                        Сьогодні лист повертається
-                                                    </span></h5>
-                                        </td>
-                                        {% elif item.expired_time < 0 %}
-                                        <td class="border border-0">
-                                            <h5><span class="text-warning">
-                                                        Лист повернуто
-                                                    </span></h5>
-                                            {% endif %}
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </td>
                             <td class="border border-0">
-                                {{ letters }}
-                                {% if not item.letter_image_url %}
-                                    <a href="https://drive.google.com/file/d/{{ item.letter_image_url }}/view?usp=drive_link" target="_blank">
+                                {% if item.letter_image_id %}
+                                    <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link" target="_blank">
                                         <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
                                              class="img-thumbnail right-angle" alt="..." width="100">
                                     </a>
-<!--                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq3KKxatmkx5h29Eilsm2Myj78RjMqgMOvv71gY7N6z1YrS-2C2N9IHGS2V5HXgejTXUk&usqp=CAU"-->
-<!--                                     class="img-thumbnail right-angle" alt="..." width="100">-->
+                                {% else %}
+                                    <img src="{% static 'dashboard/images/no_image.png' %}"
+                                     class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
                                 {% endif %}
                             </td>
                         </tr>
