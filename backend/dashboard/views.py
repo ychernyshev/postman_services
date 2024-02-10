@@ -14,14 +14,14 @@ def search_engine(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            letter = LetterItemModel.objects.filter(
+            wanted_letter = LetterItemModel.objects.filter(
                 Q(track_number__icontains=query) |
                 Q(date_of_receipt__icontains=query)
             )
 
             context = {
                 'query': query,
-                'letter': letter,
+                'wanted_letter': wanted_letter,
             }
 
         return render(request, 'dashboard/search/search_results.html', context=context)
