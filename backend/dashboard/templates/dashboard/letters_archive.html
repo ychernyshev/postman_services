@@ -18,15 +18,15 @@
                 </div>
                 <div class="col-lg">
                     <p class="text-center">
-                        <strong>Отримувач</strong>
+                        <strong>Адреса отримувача</strong>
                     </p>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <p class="text-center">
                         <strong>Дати</strong>
                     </p>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     <p class="text-center">
                         <strong>Фото</strong>
                     </p>
@@ -34,35 +34,61 @@
             </div>
             <hr class="mb-5">
 
-
             {% for item in letters %}
             <div class="row">
                 <div class="col-lg">
                     <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
-                       class="w-100 p-3 btn button-light right-angle"
+                       class="w-100 p-3 btn button-light right-angle position-relative"
                        title="Відстежити"
                        target="_blank">
                         {{ item.track_number }}
+                        {% if item.expired_time and item.expired_time > 3 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
+                             text-dark d-flex align-items-center justify-content-center">
+                                <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                            </span>
+                        {% elif 1 < item.expired_time and item.expired_time <= 3 %}
+                            <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
+                                <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                            </span>
+                        {% elif 0 < item.expired_time and item.expired_time <= 1 %}
+                            <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
+                                <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                            </span>
+                        {% elif item.expired_time < 0 %}
+                            <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-black">
+                                <strong style="font-size: 1.2rem">Лист повернуто</strong>
+                            </span>
+                        {% endif %}
                     </a>
+                    {% if 0 < item.expired_time and item.expired_time <= 3 %}
+                        <div class="p-1 bg-warning text-center">
+                            <strong>Закінчується термін збереження листа</strong>
+                        </div>
+                    {% elif item.expired_time == 0 %}
+                        <div class="p-1 bg-info text-center">
+                            <span>Сьогодні лист повертається</span>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="col-lg">
                     <div class="d-flex justify-content-between">
                         {% if item.is_court %}
-                            <div class="alert alert-info right-angle w-100 text-center" role="alert">
-                                <strong class="text-info-emphasis">Суд</strong>
+                            <div class="p-3 w-100 text-center" role="alert">
+                                <strong>Суд</strong>
                             </div>
                         {% endif %}
 
                         {% if item.is_court_subpoena %}
-                            <div class="alert alert-warning right-angle w-100 text-center" role="alert">
-                                <strong class="text-warning">Повістка</strong>
+                            <div class="p-3 bg-warning w-100 text-center" role="alert">
+                                <strong>Повістка</strong>
                             </div>
                         {% endif %}
 
                         {% if item.is_police_fine %}
                             <div class="p-3 w-100 text-center" role="alert">
-                                <strong class="text-primary">Поліцейський штраф</strong>
+                                <strong>Поліцейський штраф</strong>
                             </div>
                         {% endif %}
                     </div>
@@ -81,67 +107,29 @@
                     </p>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="d-flex justify-content-between p-2">
                         <span>
-                            <strong>Дата надходження:</strong>
+                            <strong>Дата надходження:&nbsp;</strong>
                         </span>
                         <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
                     </div>
-                    {% if 0 < item.expired_time and item.expired_time <= 3 %}
-                        <div class="d-flex justify-content-between p-2 bg-warning">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                        </div>
-                        <div class="p-2 bg-warning mb-3">
-                            <strong>Закінчується термін збереження листа</strong>
-                        </div>
-                    {% elif item.expired_time == 0 %}
-                        <div class="d-flex justify-content-between p-2 bg-warning">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                            <span class="badge bg-secondary right-angle">
-                                            Сьогодні лист повертається
-                                        </span>
-                        </div>
-                    {% elif item.expired_time < 0 %}
-                        <div class="d-flex justify-content-between p-2 bg-secondary">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                            <span class="text-warning">
-                                Лист повернуто
-                            </span>
-                        </div>
-                    {% else %}
-                        <div class="d-flex justify-content-between p-2">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>{{ item.expired_date| date:'d.m.Y' }}</span>
-                        </div>
-                    {% endif %}
-                    {% if item.expired_time < 0 %}
-                    {% elif item.expired_time >= 0 %}
-                        <div class="alert alert-info right-angle" role="alert">
-                            Залишок днів збереження:
-                            <strong>{{ item.expired_time }}</strong>
-                        </div>
-                    {% endif %}
+                    <div class="d-flex justify-content-between p-2">
+                        <span>
+                            <strong>Збереження до:&nbsp;</strong>
+                        </span>
+                        <span style="text-decoration: dotted;">{{ item.expired_date| date:'d.m.Y' }}</span>
+                    </div>
+<!--                    {% if item.expired_time < 0 %}-->
+<!--                    {% elif item.expired_time >= 0 %}-->
+<!--                        <div class="alert alert-info right-angle" role="alert">-->
+<!--                            Залишок днів збереження:-->
+<!--                            <strong>{{ item.expired_time }}</strong>-->
+<!--                        </div>-->
+<!--                    {% endif %}-->
                 </div>
 
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     {% if item.letter_image_id %}
                         <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
                            target="_blank">
@@ -154,6 +142,22 @@
                     {% endif %}
                 </div>
             </div>
+<!--            <div class="row">-->
+<!--                <div class="accordion" id="accordionPanelsStayOpenExample">-->
+<!--                  <div class="accordion-item">-->
+<!--                    <h2 class="accordion-header">-->
+<!--                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p{{ item.track_number }}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">-->
+<!--                        Вся інформація-->
+<!--                      </button>-->
+<!--                    </h2>-->
+<!--                    <div id="p{{ item.track_number }}" class="accordion-collapse collapse">-->
+<!--                      <div class="accordion-body">-->
+<!--                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <hr class="mb-5">
             {% endfor %}
 

@@ -49,3 +49,11 @@ table.bg-light-gray {
 .text-secondary-light {
     color: #dedede;
 }
+
+.border-primary {
+    border: .1rem solid #4FA3FF;
+}
+
+.border-warning {
+    border: .1rem solid #FFC107;
+}
