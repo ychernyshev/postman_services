@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import forms
 
-from .models import RecipientModel
+from .models import RecipientModel, LetterItemModel
 
 
 class SearchForm(forms.Form):
@@ -30,6 +30,7 @@ class AddLetterForm(forms.Form):
         'class': 'form-control right-angle media-input',
     }),
         initial=datetime.today())
+    marks = forms.ChoiceField(label='', widget=forms.Select(attrs={'class': 'form-control'}))
     is_court = forms.BooleanField(label='Суд',
                                   initial=False,
                                   required=False,
@@ -54,4 +55,3 @@ class AddLetterForm(forms.Form):
         'class': 'form-control',
         'placeholder': 'ID фото',
     }))
-
