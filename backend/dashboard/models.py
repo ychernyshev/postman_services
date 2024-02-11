@@ -11,17 +11,9 @@ from django.db import models
 
 
 class LetterItemModel(models.Model):
-    MARKS = [
-        ('', ''),
-        ('COURT', 'Суд'),
-        ('CRTSU', 'Судова повістка'),
-        ('PFINE', 'Поліцейський штраф'),
-    ]
-
     track_number = models.CharField(max_length=13)
     slug = models.SlugField(max_length=13, unique=True, blank=True)
     address = models.ForeignKey('RecipientModel', db_index=True, on_delete=models.PROTECT)
-    marks = models.CharField(choices=MARKS, max_length=5, default='')
     is_court = models.BooleanField(default=False)
     is_court_subpoena = models.BooleanField(default=False)
     is_police_fine = models.BooleanField(default=False)

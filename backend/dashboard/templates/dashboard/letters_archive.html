@@ -6,12 +6,12 @@
     <div class="row justify-content-center mt-2">
         <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
             <div class="row">
-                <div class="col-lg">
+                <div class="col-lg-3">
                     <p class="text-center">
                         <strong>Номер відстеження</strong>
                     </p>
                 </div>
-                <div class="col-lg">
+                <div class="col-lg-2">
                     <p class="text-center">
                         <strong>Відмітки</strong>
                     </p>
@@ -36,7 +36,7 @@
 
             {% for item in letters %}
             <div class="row">
-                <div class="col-lg">
+                <div class="col-lg-3">
                     <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
                        class="w-100 p-3 btn button-light right-angle position-relative"
                        title="Відстежити"
@@ -44,7 +44,7 @@
                         {{ item.track_number }}
                         {% if item.expired_time and item.expired_time > 3 %}
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
-                             text-dark d-flex align-items-center justify-content-center">
+                             text-dark d-flex align-items-center justify-content-center bg-light-subtle border">
                                 <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
                             </span>
                         {% elif 1 < item.expired_time and item.expired_time <= 3 %}
@@ -72,23 +72,34 @@
                     {% endif %}
                 </div>
 
-                <div class="col-lg">
+                <div class="col-lg-2">
                     <div class="d-flex justify-content-between">
                         {% if item.is_court %}
-                            <div class="p-3 w-100 text-center" role="alert">
+                            <div class="p-3 w-100 text-center border bg-light-subtle" role="alert">
                                 <strong>Суд</strong>
                             </div>
                         {% endif %}
 
                         {% if item.is_court_subpoena %}
-                            <div class="p-3 bg-warning w-100 text-center" role="alert">
+                        <div class="d-flex flex-column w-100">
+                            <div class="p-3 text-center border-start border-end border-top bg-light-subtle" role="alert">
+                                <strong>Суд</strong>
+                            </div>
+                            <div class="p-1 bg-warning w-100 text-center" role="alert">
                                 <strong>Повістка</strong>
                             </div>
+                        </div>
                         {% endif %}
 
                         {% if item.is_police_fine %}
-                            <div class="p-3 w-100 text-center" role="alert">
+                            <div class="p-3 w-100 text-center border bg-info-subtle" role="alert">
                                 <strong>Поліцейський штраф</strong>
+                            </div>
+                        {% endif %}
+
+                        {% if not item.is_court and not item.is_court_subpoena and not item.is_police_fine %}
+                            <div class="p-3 w-100 text-center" role="alert">
+                                <strong>—</strong>
                             </div>
                         {% endif %}
                     </div>

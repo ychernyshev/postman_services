@@ -30,7 +30,6 @@ class AddLetterForm(forms.Form):
         'class': 'form-control right-angle media-input',
     }),
         initial=datetime.today())
-    marks = forms.ChoiceField(label='', widget=forms.Select(attrs={'class': 'form-control'}))
     is_court = forms.BooleanField(label='Суд',
                                   initial=False,
                                   required=False,

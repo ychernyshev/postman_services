@@ -18,7 +18,7 @@ class RecipientAdmin(admin.ModelAdmin):
 # Register your models here.
 @admin.register(LetterItemModel)
 class LetterItemAdmin(admin.ModelAdmin):
-    list_display = ['track_number', 'marks', 'is_court', 'is_court_subpoena',
+    list_display = ['track_number', 'is_court', 'is_court_subpoena',
                     'is_police_fine', 'date_of_receipt', 'expired_date']
     list_display_links = ['track_number']
     change_list = ['is_court', 'is_court_subpoena', 'is_police_fine']
