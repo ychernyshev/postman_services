@@ -2,225 +2,222 @@
 {% load static %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-5">
-        <div class="container">
-            <div class="row justify-content-center mt-2">
-                <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-lg-6">
-                                {{ form.track_number }}
-                            </div>
-                            <div class="col-lg-6">
-                                {{ form.date_of_receipt }}
+<div class="container-fluid p-4 bg-white">
+    <div class="row justify-content-center mt-2">
+        <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="container">
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-lg-11 bg-white p-4 mt-5">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            {{ form.track_number }}
+                                        </div>
+                                        <div class="col-lg-6">
+                                            {{ form.date_of_receipt }}
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            {{ form.address }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mt-4">
+                                        <div class="col-lg-10">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th scope="row" class="border border-0">{{ form.is_court.label }}:
+                                                    </th>
+                                                    <td class="border border-0">{{ form.is_court }}</td>
+                                                    <th scope="row" class="border border-0">{{ form.is_court_subpoena.label }}:
+                                                    </th>
+                                                    <td class="border border-0">{{ form.is_court_subpoena }}</td>
+                                                    <th scope="row" class="border border-0">{{ form.is_police_fine.label }}:
+                                                    </th>
+                                                    <td class="border border-0">{{ form.is_police_fine }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-12">
+                                            {{ form.letter_image_url }}
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-12">
+                                            {{ form.letter_image_id }}
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end mt-4">
+                                        <div class="col-lg-5 d-grid">
+                                            <button class="btn btn-success btn-block button-blue right-angle">Додати
+                                                лист
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-lg-12">
-                                {{ form.address }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-center mt-4">
-                            <div class="col-lg-10">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row" class="border border-0">{{ form.is_court.label }}:</th>
-                                        <td class="border border-0">{{ form.is_court }}</td>
-                                        <th scope="row" class="border border-0">{{ form.is_court_subpoena.label }}:</th>
-                                        <td class="border border-0">{{ form.is_court_subpoena }}</td>
-                                        <th scope="row" class="border border-0">{{ form.is_police_fine.label }}:</th>
-                                        <td class="border border-0">{{ form.is_police_fine }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-lg-12">
-                                {{ form.letter_image_url }}
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-lg-12">
-                                {{ form.letter_image_id }}
-                            </div>
-                        </div>
-                        <div class="row justify-content-center mt-4">
-                            <div class="col-lg-5 d-grid">
-                                <button class="btn btn-success btn-block button-blue right-angle">Додати лист</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div class="container">
-            <div class="row justify-content-center mt-2">
-                <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
-                    <table class="table bg-light-gray">
-                        <thead>
-                        <tr>
-                            <th scope="col" class="border border-0">Номер відстеження</th>
-                            <th scope="col" class="border border-0">Відмітки</th>
-                            <th scope="col" class="border border-0">Отримувач</th>
-                            <th scope="col" class="border border-0">Дати</th>
-                            <th scope="col" class="border border-0">Фото</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in letters %}
-                        <tr>
-                            <th scope="row" class="border border-0">
-                                <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
-                                   class="btn button-light right-angle"
-                                   title="Відстежити"
-                                   target="_blank">
-                                    {{ item.track_number }}
-                                </a>
-                            </th>
-                            <td class="border border-0">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td class="border border-0">
-                                            {% if not item.is_court %}
-                                            <strong class="text-secondary">Суд</strong>
-                                            {% else %}
-                                            <strong class="text-info-emphasis">Суд</strong>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-0">
-                                            {% if not item.is_court_subpoena %}
-                                            <strong class="text-secondary">Повістка</strong>
-                                            {% else %}
-                                            <strong class="text-warning">Повістка</strong>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-0">
-                                            {% if not item.is_police_subpoena %}
-                                            <strong class="text-secondary">Штраф</strong>
-                                            {% else %}
-                                            <strong class="text-primary">Штраф</strong>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                            <td class="border border-0">
-                                {{ item.address.get_street_display }} {{ item.address.build }}
-                                {% if item.address.build_letter %}
-                                {{ item.address.build_letter }}
-                                {% endif %}
-                                {% if item.address.apartment %}
-                                /
-                                {{ item.address.apartment }}
-                                {% endif %}
-                            </td>
-                            <td class="border border-0">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <th scope="col" class="border border-0">Дата надходження:</th>
-                                        <td class="border border-0">
-                                            {{ item.date_of_receipt|date:'d.m.Y' }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col" class="border border-0">Збереження до:</th>
-                                        <td class="border border-0">
-                                            {{ item.expired_date| date:'d.m.Y' }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="border border-0">
-                                            {% if 0 < item.expired_time and item.expired_time <= 3 %}
-                                                <div class="d-flex justify-center p-2 bg-warning">
+                <div class="col-lg-7">
+                    <div class="container">
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-lg-11 bg-white p-4 mt-5">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <p class="text-center">
+                                            <strong>Номер відстеження</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="text-center">
+                                            <strong>Відмітки</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <p class="text-center">
+                                            <strong>Фото</strong>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {% for item in letters %}
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
+                                                   class="w-100 p-3 btn button-light right-angle position-relative"
+                                                   title="Відстежити"
+                                                   target="_blank">
+                                                    {{ item.track_number }}
+                                                    {% if item.expired_time and item.expired_time > 3 %}
+                                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
+                                     text-dark d-flex align-items-center justify-content-center bg-light-subtle border">
+                                        <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                    </span>
+                                                    {% elif 1 < item.expired_time and item.expired_time <= 3 %}
+                                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
+                                        <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                    </span>
+                                                    {% elif 0 < item.expired_time and item.expired_time <= 1 %}
+                                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
+                                        <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                    </span>
+                                                    {% elif item.expired_time < 0 %}
+                                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-black">
+                                        <strong style="font-size: 1.2rem">Лист повернуто</strong>
+                                    </span>
+                                                    {% endif %}
+                                                </a>
+                                                {% if 0 < item.expired_time and item.expired_time <= 3 %}
+                                                <div class="p-1 bg-warning text-center">
                                                     <strong>Закінчується термін збереження листа</strong>
                                                 </div>
-                                            {% elif item.expired_time == 0 %}
-                                                <h5>
-                                                    <span class="badge bg-secondary right-angle">
-                                                            Сьогодні лист повертається
-                                                        </span>
-                                                </h5>
-                                            {% elif item.expired_time < 0 %}
-                                                <h5>
-                                                    <span class="text-warning">
-                                                            Лист повернуто
-                                                        </span>
-                                                </h5>
-                                            {% endif %}
-                                            <div class="alert alert-info right-angle" role="alert">
-                                                Залишок днів збереження:
-                                                <strong>{{ item.expired_time }}</strong>
+                                                {% elif item.expired_time == 0 %}
+                                                <div class="p-1 bg-info text-center">
+                                                    <span>Сьогодні лист повертається</span>
+                                                </div>
+                                                {% endif %}
                                             </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                            <td class="border border-0">
-                                {% if item.letter_image_id %}
-                                    <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link" target="_blank">
-                                        <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                                             class="img-thumbnail right-angle" alt="..." width="100">
-                                    </a>
-                                {% else %}
-                                    <img src="{% static 'dashboard/images/no_image.png' %}"
-                                     class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
 
+                                            <div class="col-lg-4">
+                                                <div class="d-flex justify-content-between">
+                                                    {% if item.is_court %}
+                                                    <div class="p-3 w-100 text-center border bg-light-subtle"
+                                                         role="alert">
+                                                        <strong>Суд</strong>
+                                                    </div>
+                                                    {% endif %}
 
-                    <div class="row justify-content-center">
-                        <div class="col-lg-2 d-flex justify-content-center">                            <!-- pagination-->
-                            <nav class="mt-1 mx-auto"
-                                 aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        {% if letters_numbers.has_previous %}
-                                        <a class="page-link"
-                                           href="?page={{ letters_numbers.previous_page.number }}"
-                                           aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
+                                                    {% if item.is_court_subpoena %}
+                                                    <div class="d-flex flex-column w-100">
+                                                        <div class="p-3 text-center border-start border-end border-top bg-light-subtle"
+                                                             role="alert">
+                                                            <strong>Суд</strong>
+                                                        </div>
+                                                        <div class="p-1 bg-warning w-100 text-center" role="alert">
+                                                            <strong>Повістка</strong>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if item.is_police_fine %}
+                                                    <div class="p-3 w-100 text-center border bg-info-subtle"
+                                                         role="alert">
+                                                        <strong>Поліцейський штраф</strong>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if not item.is_court and not item.is_court_subpoena and not item.is_police_fine %}
+                                                        <div class="p-3 w-100 text-center" role="alert">
+                                                            <strong>—</strong>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 border bg-light-subtle">
+                                            <div class="col-lg mt-3">
+                                                <p class="text-center">
+                                                    <strong>Адреса отримувача</strong>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg mt-3">
+                                                <p class="text-center">
+                                                    {{ item.address.get_street_display }} {{ item.address.build }}
+                                                    {% if item.address.build_letter %}
+                                                        {{ item.address.build_letter }}
+                                                    {% endif %}
+                                                    {% if item.address.apartment %}
+                                                        /
+                                                        {{ item.address.apartment }}
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        {% if item.letter_image_id %}
+                                        <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
+                                           target="_blank">
+                                            <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
+                                                 class="img-thumbnail right-angle" alt="{{ item.track_number }}_image"
+                                                 width="100%">
                                         </a>
+                                        {% else %}
+                                        <img src="{% static 'dashboard/images/no_image.png' %}"
+                                             class="img-thumbnail right-angle" alt="{{ item.track_number }}_image"
+                                             width="100%">
                                         {% endif %}
-                                    </li>
-                                    {% for page in letters_numbers.paginator.page_range %}
-                                    {% if page > letters_numbers.number|add:-10 and page < letters_numbers.number|add:10 %}
-                                    <li class="page-item"><a class="page-link"
-                                                             href="?page={{ page }}">{{ page }}</a>
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
-                                    {% if letters_numbers.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ letters_numbers.paginator.num_pages }}"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                    <li class="page-item">
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!-- /pagination-->
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg d-flex flex-row justify-content-around border bg-light-subtle">
+                                        <div class="d-flex justify-content-between p-2">
+                                            <span>
+                                                <strong>Дата надходження:&nbsp;</strong>
+                                            </span>
+                                            <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between p-2">
+                                            <span>
+                                                <strong>Збереження до:&nbsp;</strong>
+                                            </span>
+                                            <span style="text-decoration: dotted;">{{ item.expired_date| date:'d.m.Y' }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
