@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 
-from .models import LetterItemModel
+from .models import MailItemModel, RecipientModel
 from .forms import AddLetterForm, SearchForm
 
 
@@ -14,7 +14,7 @@ def search_engine(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            wanted_letter = LetterItemModel.objects.filter(
+            wanted_letter = MailItemModel.objects.filter(
                 Q(track_number__icontains=query) |
                 Q(date_of_receipt__icontains=query)
             )
@@ -32,7 +32,7 @@ def index(request):
 
 
 def letters_archive(request):
-    letters = LetterItemModel.objects.all()
+    letters = RecipientModel.objects.all()
     letters_paginator = Paginator(letters, 20)
     letters_number = request.GET.get('page')
     letters_numbers = letters_paginator.get_page(letters_number)
@@ -46,16 +46,16 @@ def letters_archive(request):
 
 
 def add_letter(request):
-    letters = LetterItemModel.objects.all()[:1]
+    letters = MailItemModel.objects.all()[:1]
 
     if request.method == 'POST':
         form = AddLetterForm(request.POST)
         if form.is_valid():
             track_number = form.cleaned_data['track_number']
-            if LetterItemModel.objects.filter(track_number=track_number).exists():
+            if MailItemModel.objects.filter(track_number=track_number).exists():
                 messages.warning(request, 'Такій лист вже був збережений раніше')
             else:
-                LetterItemModel.objects.create(**form.cleaned_data)
+                MailItemModel.objects.create(**form.cleaned_data)
                 return HttpResponseRedirect(reversed('dashboard:letters_archive'))
     else:
         form = AddLetterForm()
@@ -66,3 +66,13 @@ def add_letter(request):
     }
 
     return render(request, 'dashboard/add_letter.html', context=context)
+
+
+def recipient_data(request, pk=None):
+    recipient = RecipientModel.objects.filter(pk=pk)
+
+    context = {
+        'recipient_data': recipient,
+    }
+
+    return render(request, 'dashboard/recipient_data.html', context=context)

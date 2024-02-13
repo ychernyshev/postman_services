@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import LetterItemModel, RecipientModel
+from .models import MailItemModel, RecipientModel
+
+
+class MailItemInline(admin.TabularInline):
+    model = MailItemModel
 
 
 # @admin.register(SenderModel)
@@ -13,10 +17,11 @@ from .models import LetterItemModel, RecipientModel
 class RecipientAdmin(admin.ModelAdmin):
     list_display = ['street', 'build', 'build_letter', 'apartment']
     list_display_links = ['street']
+    inlines = [MailItemInline]
 
 
 # Register your models here.
-@admin.register(LetterItemModel)
+@admin.register(MailItemModel)
 class LetterItemAdmin(admin.ModelAdmin):
     list_display = ['track_number', 'is_court', 'is_court_subpoena',
                     'is_police_fine', 'date_of_receipt', 'expired_date']

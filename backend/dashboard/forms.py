@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django import forms
 
-from .models import RecipientModel, LetterItemModel
+from .models import RecipientModel, MailItemModel
 
 
 class SearchForm(forms.Form):

@@ -1,0 +1,14 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid p-4 bg-white">
+    <div class="row justify-content-center mt-2">
+        <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
+            {% for item in recipient_data %}
+                {{ item }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

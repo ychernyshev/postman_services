@@ -10,10 +10,10 @@ from django.db import models
 # Create your models here.
 
 
-class LetterItemModel(models.Model):
+class MailItemModel(models.Model):
     track_number = models.CharField(max_length=13)
     slug = models.SlugField(max_length=13, unique=True, blank=True)
-    address = models.ForeignKey('RecipientModel', db_index=True, on_delete=models.PROTECT)
+    address = models.ForeignKey('RecipientModel', related_name='address_mails', db_index=True, on_delete=models.PROTECT)
     is_court = models.BooleanField(default=False)
     is_court_subpoena = models.BooleanField(default=False)
     is_police_fine = models.BooleanField(default=False)
@@ -29,7 +29,7 @@ class LetterItemModel(models.Model):
         self.slug = slugify(self.track_number)
 
         if not self._is_court_subpoena and self.is_court_subpoena:
-            self.expired_date = django.utils.timezone.now() + timedelta(days=3)
+            self.expired_date = django.utils.timezone.now() + timedelta(days=4)
         else:
             self.expired_date = django.utils.timezone.now() + timedelta(days=30)
         super().save(*args, **kwargs)
@@ -131,6 +131,7 @@ class RecipientModel(models.Model):
     ]
     build_letter = models.CharField(choices=BUILD_LETTER, max_length=2, default='', blank=True, null=True)
     apartment = models.CharField(max_length=7, blank=True)
+    # mail_item = models.CharField(MailItemModel, db_index=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return f'{self.street} {self.build}{self.build_letter}/{self.apartment}'
