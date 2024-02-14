@@ -69,10 +69,12 @@ def add_letter(request):
 
 
 def recipient_data(request, pk=None):
-    recipient = RecipientModel.objects.filter(pk=pk)
+    recipient_address = RecipientModel.objects.get(pk=pk)
+    recipient_data = RecipientModel.objects.filter(pk=pk)
 
     context = {
-        'recipient_data': recipient,
+        'recipient_address': recipient_address,
+        'recipient_data': recipient_data,
     }
 
     return render(request, 'dashboard/recipient_data.html', context=context)

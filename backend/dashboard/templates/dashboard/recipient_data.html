@@ -4,10 +4,192 @@
 {% block content %}
 <div class="container-fluid p-4 bg-white">
     <div class="row justify-content-center mt-2">
-        <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
-            {% for item in recipient_data %}
-                {{ item }}
-            {% endfor %}
+        <div class="col-lg-11 mt-5">
+            <div class="card text-center border-radius-rounding shadow-1">
+                <div class="card-header">
+                    <strong class="display-6">
+                        {{ recipient_address.get_street_display }} {{ recipient_address.build }}
+                        {% if recipient_address.build_letter %}
+                        {{ recipient_address.build_letter }}
+                        {% endif %}
+                        {% if recipient_address.apartment %}
+                        /
+                        {{ recipient_address.apartment }}
+                        {% endif %}
+                    </strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <p class="text-center">
+                                <strong>Номер відстеження</strong>
+                            </p>
+                        </div>
+                        <div class="col-lg-2">
+                            <p class="text-center">
+                                <strong>Відмітки</strong>
+                            </p>
+                        </div>
+                        <div class="col-lg-3">
+                            <p class="text-center">
+                                <strong>Дати</strong>
+                            </p>
+                        </div>
+                        <div class="col-lg-2">
+                            <p class="text-center">
+                                <strong>Фото</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <hr class="mb-5">
+
+                    {% for item in recipient_data %}
+                    {% for mail in item.address_mails.all %}
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-3">
+                            <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{mail.track_number}}"
+                               class="w-100 p-3 btn button-light right-angle position-relative"
+                               title="Відстежити"
+                               target="_blank">
+                                {{ mail.track_number }}
+                                {% if mail.expired_time and mail.expired_time > 4 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
+                                     text-dark d-flex align-items-center justify-content-center bg-light-subtle border">
+                                        <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
+                                    </span>
+                                {% elif 1 <= mail.expired_time and mail.expired_time <= 4 %}
+                                <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
+                                        <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
+                                    </span>
+                                {% elif mail.expired_time and mail.expired_time == 0 %}
+                                <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
+                                        <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
+                                    </span>
+                                {% elif mail.expired_time < 0 %}
+                                <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-black">
+                                        <strong style="font-size: 1.2rem">Лист повернуто</strong>
+                                    </span>
+                                {% endif %}
+                            </a>
+                            {% if 0 < mail.expired_time and mail.expired_time <= 4 %}
+                            <div class="p-1 bg-warning text-center">
+                                <strong>Закінчується термін збереження листа</strong>
+                            </div>
+                            {% elif mail.expired_time == 0 %}
+                            <div class="p-1 bg-info text-center">
+                                <span>Сьогодні лист повертається</span>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="d-flex justify-content-between">
+                                {% if mail.is_court %}
+                                <div class="p-3 w-100 text-center border bg-light-subtle" role="alert">
+                                    <strong>Суд</strong>
+                                </div>
+                                {% endif %}
+
+                                {% if mail.is_court_subpoena %}
+                                <div class="d-flex flex-column w-100">
+                                    <div class="p-3 text-center border-start border-end border-top bg-light-subtle"
+                                         role="alert">
+                                        <strong>Суд</strong>
+                                    </div>
+                                    <div class="p-1 bg-warning w-100 text-center" role="alert">
+                                        <strong>Повістка</strong>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if mail.is_police_fine %}
+                                <div class="p-3 w-100 text-center border bg-info-subtle" role="alert">
+                                    <strong>Поліцейський штраф</strong>
+                                </div>
+                                {% endif %}
+
+                                {% if not mail.is_court and not mail.is_court_subpoena and not mail.is_police_fine %}
+                                <div class="p-3 w-100 text-center" role="alert">
+                                    <strong>—</strong>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="d-flex justify-content-between p-2">
+                                <span>
+                                    <strong>Дата надходження:&nbsp;</strong>
+                                </span>
+                                <span>{{ mail.date_of_receipt|date:'d.m.Y' }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between p-2">
+                                <span>
+                                    <strong>Збереження до:&nbsp;</strong>
+                                </span>
+                                <span style="text-decoration: dotted;">{{ mail.expired_date| date:'d.m.Y' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            {% if mail.letter_image_id %}
+                            <a href="https://drive.google.com/file/d/{{ mail.letter_image_id }}/view?usp=drive_link"
+                               target="_blank">
+                                <img src="https://drive.google.com/thumbnail?id={{ mail.letter_image_id }}"
+                                     class="img-thumbnail right-angle" alt="{{ mail.track_number }}_image"
+                                     width="100%">
+                            </a>
+                            {% else %}
+                            <img src="{% static 'dashboard/images/no_image.png' %}"
+                                 class="img-thumbnail right-angle" alt="{{ mail.track_number }}_image"
+                                 width="100%">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <hr class="mb-5">
+                    {% endfor %}
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-2 d-flex justify-content-center">
+                            <!-- pagination-->
+                            <nav class="mt-1 mx-auto"
+                                 aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        {% if letters_numbers.has_previous %}
+                                        <a class="page-link"
+                                           href="?page={{ letters_numbers.previous_page.number }}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                        {% endif %}
+                                    </li>
+                                    {% for page in letters_numbers.paginator.page_range %}
+                                    {% if page > letters_numbers.number|add:-10 and page < letters_numbers.number|add:10 %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if letters_numbers.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ letters_numbers.paginator.num_pages }}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    <li class="page-item">
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!-- /pagination-->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
