@@ -45,14 +45,15 @@
                                 {{ mail.track_number }}
                                 {% if mail.expired_time and mail.expired_time > 4 %}
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
-                                     text-dark d-flex align-items-center justify-content-center bg-light-subtle border">
+                                     text-dark d-flex align-items-center justify-content-center bg-light-subtle border"
+                                    title="Залишок днів збереження">
                                         <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
                                     </span>
                                 {% elif 1 <= mail.expired_time and mail.expired_time <= 4 %}
                                     <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
                                         <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
                                     </span>
-                                {% elif mail.expired_time and mail.expired_time == 0 %}
+                                {% elif mail.expired_time == 0 %}
                                     <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
                                         <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
                                     </span>

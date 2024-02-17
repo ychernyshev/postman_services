@@ -172,14 +172,17 @@
                                             </div>
                                             <div class="col-lg mt-3">
                                                 <p class="text-center">
-                                                    {{ item.address.get_street_display }} {{ item.address.build }}
-                                                    {% if item.address.build_letter %}
-                                                        {{ item.address.build_letter }}
-                                                    {% endif %}
-                                                    {% if item.address.apartment %}
-                                                        /
-                                                        {{ item.address.apartment }}
-                                                    {% endif %}
+                                                    <a href="{% url 'dashboard:recipient_data' item.address.pk %}"
+                                                    class="text-secondary">
+                                                        {{ item.address.get_street_display }} {{ item.address.build }}
+                                                        {% if item.address.build_letter %}
+                                                            {{ item.address.build_letter }}
+                                                        {% endif %}
+                                                        {% if item.address.apartment %}
+                                                            /
+                                                            {{ item.address.apartment }}
+                                                        {% endif %}
+                                                    </a>
                                                 </p>
                                             </div>
                                         </div>
