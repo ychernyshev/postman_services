@@ -14,15 +14,8 @@ import os
 
 from pathlib import Path
 from dotenv import load_dotenv
-import mongoengine
-
 
 load_dotenv()
-
-DB_NAME = os.environ.get('db_name')
-HOSTNAME = os.environ.get('hostname')
-USERNAME = os.environ.get('username')
-PWD = os.environ.get('pwd')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,15 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    # 'default': {
-    #     'ENGINE': 'djongo',
-    #     'NAME': DB_NAME,
-    #     'ENFORCE_SCHEMA': False,
-    #     'CLIENT': {
-    #         'host': HOSTNAME
-    #     }
-    # }
+    }
 }
 
 # Password validation
