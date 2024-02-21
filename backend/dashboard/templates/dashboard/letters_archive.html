@@ -57,10 +57,6 @@
                                     <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
                                         <strong style="font-size: 1.2rem">{{ mail.expired_time }}</strong>
                                     </span>
-                                {% elif mail.expired_time < 0 %}
-                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-black">
-                                        <strong style="font-size: 1.2rem">Лист повернуто</strong>
-                                    </span>
                                 {% endif %}
                             </a>
                             {% if 0 < mail.expired_time and mail.expired_time <= 4 %}
@@ -70,6 +66,10 @@
                             {% elif mail.expired_time == 0 %}
                                 <div class="p-1 bg-info text-center">
                                     <strong>Сьогодні лист повертається</strong>
+                                </div>
+                            {% elif mail.expired_time < 0 %}
+                            <div class="p-1 bg-secondary text-light text-center">
+                                    <strong>Лист повернуто</strong>
                                 </div>
                             {% endif %}
                         </div>
