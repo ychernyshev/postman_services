@@ -127,3 +127,7 @@ input[type=checkbox] {
 .underline-none {
     text-decoration: none;
 }
+
+.nav-padding {
+    padding: .48rem 3.5rem .48rem 3.5rem;
+}

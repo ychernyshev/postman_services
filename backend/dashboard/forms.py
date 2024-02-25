@@ -8,7 +8,7 @@ from .models import RecipientModel, MailItemModel
 class SearchForm(forms.Form):
     query = forms.CharField(label='', widget=forms.TextInput(attrs={
         'class': 'form-control mr-sm-2 right-angle outline media-input',
-        'placeholder': 'Номер відстеження', 'aria-label': 'search'
+        'placeholder': 'Пошуковий запит...', 'aria-label': 'search'
     }))
 
 
@@ -16,15 +16,15 @@ class AddLetterDateField(forms.DateInput):
     input_type = 'date'
 
 
-class AddLetterForm(forms.Form):
+class AddMailForm(forms.Form):
     track_number = forms.CharField(label='', widget=forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'form-control right-angle',
         'placeholder': 'Номер відстеження',
     }))
     address = forms.ModelChoiceField(label='', empty_label='отримувач',
                                      queryset=RecipientModel.objects.all(),
                                      widget=forms.Select(attrs={
-                                         'class': 'form-control'
+                                         'class': 'form-control right-angle'
                                      }))
     date_of_receipt = forms.DateField(widget=AddLetterDateField(attrs={
         'class': 'form-control right-angle media-input',
@@ -46,11 +46,26 @@ class AddLetterForm(forms.Form):
                                         widget=forms.CheckboxInput(attrs={
                                             'class': 'form-check-input right-angle media-input'
                                         }))
-    letter_image_url = forms.CharField(label='', widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Адреса фото',
-    }))
     letter_image_id = forms.CharField(label='', widget=forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'form-control right-angle',
         'placeholder': 'ID фото',
+    }))
+
+
+class AddNewRecipientForm(forms.Form):
+    street = forms.ChoiceField(label='Вулиця',
+                               choices=RecipientModel.STREET,
+                               widget=forms.Select(attrs={
+                                   'class': 'form-control right-angle',
+                               }))
+    build = forms.ChoiceField(label='№ будинку (Літери немає по замовченню)',
+                              choices=RecipientModel.BUILD,
+                              widget=forms.Select(attrs={
+                                  'class': 'form-control right-angle media-input media-input'}))
+    build_letter = forms.ChoiceField(label='Літера будинку (Літери немає по замовченню)',
+                                     choices=RecipientModel.BUILD_LETTER,
+                                     widget=forms.Select(attrs={
+                                         'class': 'form-control right-angle media-input media-input'}))
+    apartment = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control right-angle media-input', 'placeholder': '№ квартири'
     }))

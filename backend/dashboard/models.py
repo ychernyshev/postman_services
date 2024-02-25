@@ -17,8 +17,9 @@ class MailItemModel(models.Model):
     is_court = models.BooleanField(default=False)
     is_court_subpoena = models.BooleanField(default=False)
     is_police_fine = models.BooleanField(default=False)
+    re_entry = models.BooleanField(default=False)
     letter_image_id = models.CharField(max_length=40, blank=True)
-    date_of_receipt = models.DateField(auto_now_add=True)
+    date_of_receipt = models.DateTimeField(auto_now_add=True)
     expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 
     def __init__(self, *args, **kwargs):
@@ -64,7 +65,7 @@ class MailItemModel(models.Model):
                 f'{self.is_police_fine}')
 
     class Meta:
-        ordering = ['date_of_receipt']
+        ordering = ['-date_of_receipt']
         verbose_name = 'letter'
         verbose_name_plural = 'Letters'
 
@@ -92,7 +93,7 @@ class RecipientModel(models.Model):
     street = models.CharField(choices=STREET, max_length=3, default='STR')
 
     BUILD = [
-        ('', ''),
+        ('', ''), ('tpo', 'До відділення'),
         ('3', '3'), ('5', '5'), ('7', '7'), ('9', '9'),
         ('11', '11'), ('13', '13'), ('15', '15'),
         ('17', '17'), ('20', '20'), ('25', '25'),
@@ -137,6 +138,7 @@ class RecipientModel(models.Model):
         return f'{self.street} {self.build}{self.build_letter}/{self.apartment}'
 
     class Meta:
+        ordering = ['-id']
         verbose_name = 'recipient'
         verbose_name_plural = 'Recipients'
 
