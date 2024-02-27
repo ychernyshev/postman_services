@@ -132,6 +132,7 @@ class RecipientModel(models.Model):
     ]
     build_letter = models.CharField(choices=BUILD_LETTER, max_length=2, default='', blank=True, null=True)
     apartment = models.CharField(max_length=7, blank=True)
+    company_name = models.CharField(max_length=100, blank=True)
     # mail_item = models.CharField(MailItemModel, db_index=True, on_delete=models.PROTECT)
 
     def __str__(self):
