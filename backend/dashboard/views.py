@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from .models import MailItemModel, RecipientModel
 from .forms import AddMailForm, SearchForm, AddNewRecipientForm
@@ -27,6 +28,7 @@ def search_engine(request):
         return render(request, 'dashboard/search/search_results.html', context=context)
 
 
+@login_required(login_url='account:login')
 def index(request):
     return render(request, 'dashboard/index.html')
 
