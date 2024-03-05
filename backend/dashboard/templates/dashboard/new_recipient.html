@@ -1,0 +1,10 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn button-blue right-angle">Додати отримувача</button>
+    </form>
+{% endblock %}

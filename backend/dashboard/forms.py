@@ -64,12 +64,14 @@ class AddNewRecipientForm(forms.Form):
                                   'class': 'form-control right-angle media-input media-input'}))
     build_letter = forms.ChoiceField(label='Літера будинку (Літери немає по замовченню)',
                                      choices=RecipientModel.BUILD_LETTER,
+                                     required=False,
                                      widget=forms.Select(attrs={
                                          'class': 'form-control right-angle media-input media-input'}))
-    apartment = forms.CharField(label='', widget=forms.TextInput(attrs={
+    apartment = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={
         'class': 'form-control right-angle media-input', 'placeholder': '№ квартири'
     }))
     company_name = forms.ChoiceField(label='Назва фірми (оціонально)',
+                                     required=False,
                                      widget=forms.TextInput(attrs={
                                          'class': 'form-control right-angle',
                                      }))
