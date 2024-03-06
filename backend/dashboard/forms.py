@@ -12,7 +12,7 @@ class SearchForm(forms.Form):
     }))
 
 
-class AddLetterDateField(forms.DateInput):
+class AddMailDateField(forms.DateInput):
     input_type = 'date'
 
 
@@ -26,7 +26,7 @@ class AddMailForm(forms.Form):
                                      widget=forms.Select(attrs={
                                          'class': 'form-control right-angle'
                                      }))
-    date_of_receipt = forms.DateField(widget=AddLetterDateField(attrs={
+    date_of_receipt = forms.DateField(widget=AddMailDateField(attrs={
         'class': 'form-control right-angle media-input',
     }),
         initial=datetime.today())
@@ -36,6 +36,7 @@ class AddMailForm(forms.Form):
                                   widget=forms.CheckboxInput(attrs={
                                       'class': 'form-check-input right-angle media-input'
                                   }))
+    the_expired_date = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle'}))
     is_court_subpoena = forms.BooleanField(label='Повістка',
                                            initial=False, required=False,
                                            widget=forms.CheckboxInput(attrs={

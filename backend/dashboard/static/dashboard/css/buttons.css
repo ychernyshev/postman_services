@@ -33,6 +33,7 @@
 
 .button-light {
     /*padding: .5rem 1rem .5rem 1rem;*/
+    padding: .48rem 3.5rem .48rem 3.5rem;
     box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
     background: #ffffff;
     border: none;
@@ -47,6 +48,7 @@
 }
 
 .button-blue {
+    padding: .48rem 3.5rem .48rem 3.5rem;
     box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
     background: #4FA3FF;
     border: none;

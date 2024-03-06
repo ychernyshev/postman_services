@@ -20,16 +20,19 @@ class MailItemModel(models.Model):
     re_entry = models.BooleanField(default=False)
     letter_image_id = models.CharField(max_length=40, blank=True)
     date_of_receipt = models.DateTimeField(auto_now_add=True)
+    the_expired_date = models.DateField(auto_now=False, blank=True, null=True)
     expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._is_court = self.is_court
         self._is_court_subpoena = self.is_court_subpoena
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.track_number)
 
-        if not self._is_court_subpoena and self.is_court_subpoena:
+        if not self._is_court and self.is_court_subpoena:
+            # self.expired_date = date_of_receipt + timedelta(days=4)
             self.expired_date = django.utils.timezone.now() + timedelta(days=4)
         else:
             self.expired_date = django.utils.timezone.now() + timedelta(days=30)

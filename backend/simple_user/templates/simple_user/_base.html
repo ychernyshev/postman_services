@@ -10,26 +10,33 @@
     <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">
 </head>
 <body style="background: #F7F8FA" class="h-100">
-    <div class="row justify-content-center">
-        <div class="col-lg-2 p-5">
-            <a class="navbar-brand d-flex flex-row" href="{% url 'dashboard:dashboard' %}">
-
-                <div style="width: .3rem; height: 3rem"
-                     class="d-flex justify-content-center align-content-center bg-warning text-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-4">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex flex-row" href="{% url 'dashboard:dashboard' %}">
+            <div style="width: .3rem; height: 3.5rem"
+                 class="d-flex justify-content-center align-content-center bg-warning text-dark">
+            </div>
+            <h4>
+                <div style="margin-top: .15rem" class="bg-warning text-light p-1">
+                    <span class="d-flex flex-column">
+                        <span style="font-size: .9rem">Postman</span>
+                        <span style="font-size: .9rem">Services</span>
+                    </span>
                 </div>
-                <h4><span class="bg-warning text-light p-1">Postman</span> Services</h4>
-                <div class="">
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-5"></div>
-        <div class="col-lg-4 p-5 d-flex flex-row justify-content-end">
-            <a href="{% url 'dashboard:letters_archive' %}" class="btn button-light right-angle d-flex  align-items-center">Архів записів</a>
-            <a href="{% url 'dashboard:dashboard' %}" style="margin-left: 1rem" class="btn button-light right-angle d-flex align-items-center">Панель керування</a>
-        </div>
+            </h4>
+            <span style="margin-top: -.15rem; margin-left: .2rem; font-size: 2.2rem">45</span>
+        </a>
     </div>
-    {% block content %}{% endblock %}
+    <div class="col-lg-6 p-2 d-flex flex-row justify-content-end mx-auto">
+        <a href="{% url 'dashboard:letters_archive' %}"
+           class="text-secondary underline-none d-flex  align-items-center">Архів
+            записів</a>
+        <a href="{% url 'dashboard:dashboard' %}" style="margin-left: 1rem"
+           class="text-secondary underline-none d-flex align-items-center">Панель керування</a>
+    </div>
+</nav>
+{% block content %}{% endblock %}
 
-    <script src="{% static 'dashboard/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'dashboard/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
