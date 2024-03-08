@@ -82,13 +82,19 @@ def new_recipient(request):
             build = form.cleaned_data['build']
             build_letter = form.cleaned_data['build_letter']
             apartment = form.cleaned_data['apartment']
-            if RecipientModel.objects.filter(street=street).exists() and \
-                    RecipientModel.objects.filter(build=build).exists() and \
-                    RecipientModel.objects.filter(build_letter=build_letter).exists() and \
-                    RecipientModel.objects.filter(apartment=apartment).exists():
-                messages.success(request, 'Такий отримувач вже присутній у базі даних')
-            else:
+
+            address_checking_list = [
+                RecipientModel.objects.filter(street=street).exists(),
+                RecipientModel.objects.filter(build=build).exists(),
+                RecipientModel.objects.filter(build_letter=build_letter).exists(),
+                RecipientModel.objects.filter(apartment=apartment).exists()
+            ]
+            if False in address_checking_list:
+                messages.success(request, 'Отримувач доданий')
                 RecipientModel.objects.create(**form.cleaned_data)
+            else:
+                messages.info(request, 'Отримувач вже був доданий раніше')
+                print(f'recipient_address: {address_checking_list}')
     else:
         form = AddNewRecipientForm()
 
