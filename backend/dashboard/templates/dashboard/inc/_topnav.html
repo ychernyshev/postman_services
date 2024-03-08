@@ -1,20 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary p-4">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex flex-row" href="{% url 'dashboard:dashboard' %}">
-            <div style="width: .3rem; height: 3.5rem"
-                 class="d-flex justify-content-center align-content-center bg-warning text-dark">
-            </div>
-            <h4>
-                <span class="bg-warning text-light p-1">Postman</span>
-                <span style="font-size: 2rem">45</span>
-            </h4>
-            {#            <p class="d-flex flex-column">#}
-            {#                <span>Postman</span>#}
-            {#                <span>Services</span>#}
-            {#            </p>#}
-            <div class="">
-            </div>
-        </a>
+        {% include 'dashboard/inc/_logo.html' %}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -2,199 +2,196 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid p-4 bg-white">
-    <div class="row justify-content-center mt-2">
-        <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
-            <div class="row">
-                <div class="col-lg">
-                    <p class="text-center">
-                        <strong>Номер відстеження</strong>
-                    </p>
-                </div>
-                <div class="col-lg">
-                    <p class="text-center">
-                        <strong>Відмітки</strong>
-                    </p>
-                </div>
-                <div class="col-lg">
-                    <p class="text-center">
-                        <strong>Отримувач</strong>
-                    </p>
-                </div>
-                <div class="col-lg-3">
-                    <p class="text-center">
-                        <strong>Дати</strong>
-                    </p>
-                </div>
-                <div class="col-lg-2">
-                    <p class="text-center">
-                        <strong>Фото</strong>
-                    </p>
-                </div>
-            </div>
-            <hr class="mb-5">
-
-
-            {% for item in wanted_letter %}
-            <div class="row">
-                <div class="col-lg">
-                    <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{item.track_number}}"
-                       class="w-100 p-3 btn button-light right-angle"
-                       title="Відстежити"
-                       target="_blank">
-                        {{ item.track_number }}
-                    </a>
-                </div>
-
-                <div class="col-lg">
-                    <div class="d-flex justify-content-between">
-                        {% if item.is_court %}
-                            <div class="alert alert-info right-angle w-100 text-center" role="alert">
-                                <strong class="text-info-emphasis">Суд</strong>
-                            </div>
-                        {% endif %}
-
-                        {% if item.is_court_subpoena %}
-                            <div class="alert alert-warning right-angle w-100 text-center" role="alert">
-                                <strong class="text-warning">Повістка</strong>
-                            </div>
-                        {% endif %}
-
-                        {% if item.is_police_fine %}
-                            <div class="p-3 w-100 text-center" role="alert">
-                                <strong class="text-primary">Поліцейський штраф</strong>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col-lg">
-                    <p class="p-3 text-center">
-                        {{ item.address.get_street_display }} {{ item.address.build }}
-                        {% if item.address.build_letter %}
-                            {{ item.address.build_letter }}
-                        {% endif %}
-                        {% if item.address.apartment %}
-                            /
-                            {{ item.address.apartment }}
-                        {% endif %}
-                    </p>
-                </div>
-
-                <div class="col-lg-3">
-                    <div class="d-flex justify-content-between p-2">
-                        <span>
-                            <strong>Дата надходження:</strong>
-                        </span>
-                        <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
-                    </div>
-                    {% if 0 < item.expired_time and item.expired_time <= 3 %}
-                        <div class="d-flex justify-content-between p-2 bg-warning">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                        </div>
-                        <div class="p-2 bg-warning mb-3">
-                            <strong>Закінчується термін збереження листа</strong>
-                        </div>
-                    {% elif item.expired_time == 0 %}
-                        <div class="d-flex justify-content-between p-2 bg-warning">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                            <span class="badge bg-secondary right-angle">
-                                            Сьогодні лист повертається
-                                        </span>
-                        </div>
-                    {% elif item.expired_time < 0 %}
-                        <div class="d-flex justify-content-between p-2 bg-secondary">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>
-                                <strong>{{ item.expired_date| date:'d.m.Y' }}</strong>
-                            </span>
-                            <span class="text-warning">
-                                Лист повернуто
-                            </span>
-                        </div>
-                    {% else %}
-                        <div class="d-flex justify-content-between p-2">
-                            <span>
-                                <strong>Збереження до:</strong>
-                            </span>
-                            <span>{{ item.expired_date| date:'d.m.Y' }}</span>
-                        </div>
-                    {% endif %}
-                    {% if item.expired_time < 0 %}
-                    {% elif item.expired_time >= 0 %}
-                        <div class="alert alert-info right-angle" role="alert">
-                            Залишок днів збереження:
-                            <strong>{{ item.expired_time }}</strong>
-                        </div>
-                    {% endif %}
-                </div>
-
-                <div class="col-lg-2">
-                    {% if item.letter_image_id %}
-                        <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
-                           target="_blank">
-                            <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                                 class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
-                        </a>
-                    {% else %}
-                        <img src="{% static 'dashboard/images/no_image.png' %}"
-                             class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
-                    {% endif %}
-                </div>
-            </div>
-            <hr class="mb-5">
-            {% endfor %}
-
-            <div class="row justify-content-center">
-                <div class="col-lg-2 d-flex justify-content-center">                            <!-- pagination-->
-                    <nav class="mt-1 mx-auto"
-                         aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                {% if letters_numbers.has_previous %}
-                                    <a class="page-link"
-                                       href="?page={{ letters_numbers.previous_page.number }}"
-                                       aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                {% endif %}
-                            </li>
-                            {% for page in letters_numbers.paginator.page_range %}
-                                {% if page > letters_numbers.number|add:-10 and page < letters_numbers.number|add:10 %}
-                                    <li class="page-item"><a class="page-link"
-                                                             href="?page={{ page }}">{{ page }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            {% if letters_numbers.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="?page={{ letters_numbers.paginator.num_pages }}"
-                                       aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            <li class="page-item">
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- /pagination-->
-                </div>
-            </div>
+    <div class="w-100 text-center">
+        <div class="card-header">
+            <strong class="display-6">{{ query }}</strong>
         </div>
     </div>
-</div>
+    <hr class="mt-4">
+    <div class="row">
+        <div class="col-lg-2">
+            <p class="text-center">
+                <strong>Фото</strong>
+            </p>
+        </div>
+        <div class="col-lg-3">
+            <p class="text-center">
+                <strong>Номер відстеження</strong>
+            </p>
+        </div>
+        <div class="col-lg-2">
+            <p class="text-center">
+                <strong>Відмітки</strong>
+            </p>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3">
+            <p class="text-center">
+                <strong>Дати</strong>
+            </p>
+        </div>
+    </div>
+    {% for item in wanted_letter %}
+        <div class="card text-center border-radius-rounding shadow-1 mb-3">
+            <div class="card-body">
+                <div class="row mt-3">
+                    <div class="col-lg-1 text-center">
+                        {% if item.letter_image_id %}
+                            <a href="https://drive.google.com/file/d/{{ mail.letter_image_id }}/view?usp=drive_link"
+                               target="_blank">
+                                <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
+                                     class="img-m rounded-5" alt="{{ item.track_number }}_image"
+                                     width="60%">
+                            </a>
+                        {% else %}
+                            <img src="{% static 'dashboard/images/no_image.png' %}"
+                                 class="img-thumbnail right-angle" alt="{{item.track_number }}_image"
+                                 width="100%">
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-4 d-flex flex-row">
+                        <div class="col-lg-6">
+                            <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
+                               class="w-100 p-3 btn button-light right-angle position-relative"
+                               title="Відстежити"
+                               target="_blank">
+                                {{ item.track_number }}
+                                {% if item.expired_time and item.expired_time > 4 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
+                     text-dark d-flex align-items-center justify-content-center bg-light-subtle border"
+                                          title="Залишок днів збереження">
+                    <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+            </span>
+                                {% elif 1 <= item.expired_time and item.expired_time <= 4 %}
+                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
+                <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+            </span>
+                                {% elif item.expired_time == 0 %}
+                                    <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
+                <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+            </span>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            {% if 0 < item.expired_time and item.expired_time <= 4 %}
+                                <div class="p-1 bg-warning text-center">
+                                    <strong>Закінчується термін збереження листа</strong>
+                                </div>
+                            {% elif item.expired_time == 0 %}
+                                <div class="p-2 bg-info text-center">
+                                    <strong>Останній день збереження листа</strong>
+                                </div>
+                            {% elif item.expired_time < 0 %}
+                                <div class="p-3 bg-secondary text-light text-center">
+                                    <strong>Лист повернуто</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="d-flex justify-content-between">
+                            {% if item.is_court %}
+                                <div class="p-3 w-100 text-center border bg-light-subtle" role="alert">
+                                    <strong>Суд</strong>
+                                </div>
+                            {% endif %}
+
+                            {% if item.is_court_subpoena %}
+                                <div class="d-flex flex-column w-100">
+                                    <div class="p-3 text-center border-start border-end border-top bg-light-subtle"
+                                         role="alert">
+                                        <strong>Суд</strong>
+                                    </div>
+                                    <div class="p-1 bg-warning w-100 text-center" role="alert">
+                                        <strong>Повістка</strong>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if item.is_police_fine %}
+                                <div class="p-3 w-100 text-center border bg-info-subtle" role="alert">
+                                    <strong>Поліцейський штраф</strong>
+                                </div>
+                            {% endif %}
+
+                            {% if not item.is_court and not item.is_court_subpoena and not item.is_police_fine %}
+                                <div class="p-3 w-100 text-center" role="alert">
+                                    <strong>—</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 text-center">
+                        <a href="{% url 'dashboard:recipient_data' item.address.pk %}"
+                           class="p-3 btn btn-outline-secondary right-angle">
+                            {{ item.address.get_street_display }} {{ item.address.build }}
+                            {% if item.address.build_letter %}
+                                {{ item.address.build_letter }}
+                            {% endif %}
+                            {% if item.address.apartment %}
+                                /
+                                {{ item.address.apartment }}
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="d-flex justify-content-between p-1">
+                <span>
+                    <strong>Дата надходження:&nbsp;</strong>
+                </span>
+                            <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between p-1">
+                <span>
+                    <strong>Збереження до:&nbsp;</strong>
+                </span>
+                            <span style="text-decoration: dotted;">{{ item.expired_date| date:'d.m.Y' }}</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="col-lg-2 d-flex justify-content-center">                            <!-- pagination-->
+            <nav class="mt-1 mx-auto"
+                 aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if letters_numbers.has_previous %}
+                            <a class="page-link"
+                               href="?page={{ letters_numbers.previous_page.number }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                    {% for page in letters_numbers.paginator.page_range %}
+                        {% if page > letters_numbers.number|add:-10 and page < letters_numbers.number|add:10 %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page }}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if letters_numbers.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="?page={{ letters_numbers.paginator.num_pages }}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item">
+                    </li>
+                </ul>
+            </nav>
+            <!-- /pagination-->
+        </div>
+    </div>
 {% endblock %}
