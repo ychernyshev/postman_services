@@ -78,7 +78,7 @@
                             </div>
                             <div class="row justify-content-end mt-4">
                                 <div class="col-lg-6 d-grid">
-                                    <button class="btn btn-success btn-block button-blue right-angle">Додати
+                                    <button type="submit" class="btn btn-success btn-block button-blue right-angle">Додати
                                         лист
                                     </button>
                                 </div>
@@ -107,16 +107,16 @@
                                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill
                                      text-dark d-flex align-items-center justify-content-center bg-light-subtle border"
                                                               title="Залишок днів збереження">
-                                                    <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
-                                                </span>
+                                                            <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                                        </span>
                                                     {% elif 1 <= item.expired_time and item.expired_time <= 4 %}
                                                         <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">
-                                                    <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
-                                                </span>
+                                                            <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                                        </span>
                                                     {% elif item.expired_time == 0 %}
                                                         <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">
-                                                    <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
-                                                </span>
+                                                            <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>
+                                                        </span>
                                                     {% endif %}
                                                 </a>
                                             </div>
@@ -200,7 +200,11 @@
                                                         <span>Залишок днів збереження:&nbsp;</span>
                                                     </th>
                                                     <td class="p-3">
-                                                        {{ item.expired_time }}
+                                                        {% if item.expired_time == 0 or item.expired_time < 0 %}
+                                                            0
+                                                        {% else %}
+                                                            {{ item.expired_time }}
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                                 <tr>
