@@ -39,9 +39,6 @@
                                 <div class="col-lg-6">
                                     {{ form.date_of_receipt }}
                                 </div>
-{#                                <div class="col-lg-6">#}
-{#                                    {{ form.the_expired_date }}#}
-{#                                </div>#}
                             </div>
                             <div class="row mt-4">
                                 <div class="col-lg-7">
@@ -78,8 +75,8 @@
                             </div>
                             <div class="row justify-content-end mt-4">
                                 <div class="col-lg-6 d-grid">
-                                    <button type="submit" class="btn btn-success btn-block button-blue right-angle">Додати
-                                        лист
+                                    <button type="submit" class="btn btn-success btn-block button-blue right-angle">
+                                        Додати лист
                                     </button>
                                 </div>
                             </div>
@@ -159,7 +156,7 @@
                                                 {% endif %}
 
                                                 {% if item.is_police_fine %}
-                                                    <div class="p-3 w-100 text-center bg-primary-subtle" role="alert">
+                                                    <div class="p-3 w-100 text-center bg-info-subtle" role="alert">
                                                         <strong>Поліцейський штраф</strong>
                                                     </div>
                                                 {% endif %}

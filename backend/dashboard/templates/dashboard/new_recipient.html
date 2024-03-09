@@ -2,9 +2,13 @@
 {% load static %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn button-blue right-angle">Додати отримувача</button>
-    </form>
+<div class="row">
+    <div class="col-lg-4">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn button-blue right-angle">Додати отримувача</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
