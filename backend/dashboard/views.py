@@ -51,7 +51,7 @@ def letters_archive(request):
 
 @login_required(login_url='account:login')
 def add_letter(request):
-    letters = MailItemModel.objects.all()[:1]
+    letters = MailItemModel.objects.all().last()
 
     if request.method == 'POST':
         form = AddMailForm(request.POST)
@@ -90,7 +90,7 @@ def new_recipient(request):
                 RecipientModel.objects.filter(apartment=apartment).exists()
             ]
             if False in address_checking_list:
-                messages.success(request, 'Новий отримувач доданий')
+                messages.success(request, 'Отримувач доданий')
                 RecipientModel.objects.create(**form.cleaned_data)
             else:
                 messages.info(request, 'Отримувач вже був доданий раніше')
