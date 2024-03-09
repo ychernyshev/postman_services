@@ -1,0 +1,59 @@
+table.bg-light-gray {
+    background: #F7F8FA;
+}
+
+.light-red {
+    background: #FF7A7A;
+}
+
+.b-primary-dark {
+    background: #4895EA;
+}
+
+.b-primary-light {
+    background: #5E93FF;
+}
+
+.b-secondary {
+    background: #677D9D;
+}
+
+.b-dark-secondary {
+    background: #7D95C1;
+}
+
+.b-light-secondary {
+    background: #fefefe;
+}
+
+.b-warning {
+    background: #FFA033;
+}
+
+.b-success {
+    background: #00CC60;
+}
+
+.b-light {
+    background: #F3F9FE;
+}
+
+.text-light-not-success {
+    color: #FF7A7A;
+}
+
+.text-success-custom {
+    color: #00CC60;
+}
+
+.text-secondary-light {
+    color: #dedede;
+}
+
+.border-primary {
+    border: .1rem solid #4FA3FF;
+}
+
+.border-warning {
+    border: .1rem solid #FFC107;
+}

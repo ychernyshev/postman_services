@@ -58,17 +58,16 @@ def add_letter(request):
         if form.is_valid():
             track_number = form.cleaned_data['track_number']
             if MailItemModel.objects.filter(track_number=track_number).exists():
-                messages.info(request, 'Такій лист вже був збережений раніше')
+                messages.warning(request, 'Такій лист вже був збережений раніше')
             else:
                 MailItemModel.objects.create(**form.cleaned_data)
-                messages.success(request, 'Лист збережений')
                 return redirect('dashboard:add_letter')
     else:
         form = AddMailForm()
 
     context = {
-        'letters': letters,
         'form': form,
+        'letters': letters,
     }
 
     return render(request, 'dashboard/add_mail.html', context=context)
@@ -91,7 +90,7 @@ def new_recipient(request):
                 RecipientModel.objects.filter(apartment=apartment).exists()
             ]
             if False in address_checking_list:
-                messages.success(request, 'Отримувач доданий')
+                messages.success(request, 'Новий отримувач доданий')
                 RecipientModel.objects.create(**form.cleaned_data)
             else:
                 messages.info(request, 'Отримувач вже був доданий раніше')

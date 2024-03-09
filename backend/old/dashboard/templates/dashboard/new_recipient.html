@@ -1,0 +1,16 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid p-4 bg-white">
+        <div class="row justify-content-center mt-2">
+            <div class="col-lg-11 bg-white p-4 border-radius-rounding shadow-1 mt-5 table-responsive">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn button-blue right-angle">Додати отримувача</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

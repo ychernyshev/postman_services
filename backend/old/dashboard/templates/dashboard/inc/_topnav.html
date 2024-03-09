@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-5">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex flex-row" href="{% url 'dashboard:dashboard' %}">
+            <div style="width: .3rem; height: 3rem"
+                 class="d-flex justify-content-center align-content-center bg-warning text-dark">
+            </div>
+            <h4><span class="bg-warning text-light p-1">Postman</span> Services</h4>
+            {#            <p class="d-flex flex-column">#}
+            {#                <span>Postman</span>#}
+            {#                <span>Services</span>#}
+            {#            </p>#}
+            <div class="">
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+            <div class="btn-group" role="group">
+{#            text-body-secondary nav-padding underline-none#}
+                <a class="
+                   {% if request.path == dashboard_page %}button-light nav-padding text-body-secondary underline-none{% else %}button-blue nav-padding text-light underline-none{% endif %}"
+                   aria-current="page" href="{% url 'dashboard:dashboard' %}">
+                    Головна панель
+                </a>
+                <a class="
+                   {% if request.path == letters_archive_page %}button-light nav-padding text-body-secondary underline-none{% else %}button-blue nav-padding text-light underline-none{% endif %}"
+                   aria-current="page" href="{% url 'dashboard:letters_archive' %}">
+                    Архів листів
+                </a>
+                <a class="
+                   {% if request.path == add_letter_page %}button-light nav-padding text-body-secondary underline-none{% else %}button-blue nav-padding text-light underline-none{% endif %}"
+                   aria-current="page" href="{% url 'dashboard:add_letter' %}">
+                    Додати лист
+                </a>
+            </div>
+        </div>
+        <form action="{% url 'dashboard:search_results' %}" method="get" class="mx-auto">
+            <div class="d-flex flex-row">
+                {{ search_form.query }}
+                <button class="btn button-success my-2 my-sm-0 right-angle outline mobile-text" type="submit">
+                    Знайти
+                </button>
+            </div>
+        </form>
+    </div>
+</nav>
