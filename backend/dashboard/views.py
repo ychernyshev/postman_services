@@ -35,15 +35,15 @@ def index(request):
 
 
 @login_required(login_url='account:login')
-def letters_archive(request):
-    letters = RecipientModel.objects.all()
-    letters_paginator = Paginator(letters, 20)
-    letters_number = request.GET.get('page')
-    letters_numbers = letters_paginator.get_page(letters_number)
+def mails_archive(request):
+    mails = RecipientModel.objects.all()
+    mails_paginator = Paginator(mails, 1)
+    mails_number = request.GET.get('page')
+    mails_numbers = mails_paginator.get_page(mails_number)
 
     context = {
-        'letters': letters,
-        'letters_numbers': letters_numbers,
+        'mails': mails,
+        'mails_numbers': mails_numbers,
     }
 
     return render(request, 'dashboard/mails_archive.html', context=context)

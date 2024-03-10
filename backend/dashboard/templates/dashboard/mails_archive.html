@@ -31,7 +31,7 @@
     </div>
     <hr class="mb-5">
 
-    {% for item in letters %}
+    {% for item in mails_numbers %}
         {% for mail in item.address_mails.all %}
             <div class="row mt-3">
                 <div class="col-lg-1 text-center">
@@ -178,7 +178,7 @@
                  aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
-                        {% if letters_numbers.has_previous %}
+                        {% if mails_numbers.has_previous %}
                             <a class="page-link"
                                href="?page={{ letters_numbers.previous_page.number }}"
                                aria-label="Previous">
@@ -186,14 +186,14 @@
                             </a>
                         {% endif %}
                     </li>
-                    {% for page in letters_numbers.paginator.page_range %}
-                        {% if page > letters_numbers.number|add:-10 and page < letters_numbers.number|add:10 %}
+                    {% for page in mails_numbers.paginator.page_range %}
+                        {% if page > mails_numbers.number|add:-10 and page < mails_numbers.number|add:10 %}
                             <li class="page-item"><a class="page-link"
                                                      href="?page={{ page }}">{{ page }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
-                    {% if letters_numbers.has_next %}
+                    {% if mails_numbers.has_next %}
                         <li class="page-item">
                             <a class="page-link"
                                href="?page={{ letters_numbers.paginator.num_pages }}"
