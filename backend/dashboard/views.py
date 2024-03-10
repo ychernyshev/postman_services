@@ -51,23 +51,23 @@ def letters_archive(request):
 
 @login_required(login_url='account:login')
 def add_letter(request):
-    letters = MailItemModel.objects.all().last()
 
     if request.method == 'POST':
         form = AddMailForm(request.POST)
         if form.is_valid():
             track_number = form.cleaned_data['track_number']
             if MailItemModel.objects.filter(track_number=track_number).exists():
-                messages.warning(request, 'Такій лист вже був збережений раніше')
+                messages.info(request, 'Такій лист вже був збережений раніше')
             else:
                 MailItemModel.objects.create(**form.cleaned_data)
+                messages.success(request, 'Лист був збережений')
                 return redirect('dashboard:add_letter')
     else:
         form = AddMailForm()
 
     context = {
         'form': form,
-        'letters': letters,
+        'letters': MailItemModel.objects.all()[:1],
     }
 
     return render(request, 'dashboard/add_mail.html', context=context)

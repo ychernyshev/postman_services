@@ -36,7 +36,7 @@ class AddMailForm(forms.Form):
                                   widget=forms.CheckboxInput(attrs={
                                       'class': 'form-check-input right-angle media-input'
                                   }))
-    the_expired_date = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle'}))
+    # the_expired_date = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle'}))
     is_court_subpoena = forms.BooleanField(label='Повістка',
                                            initial=False, required=False,
                                            widget=forms.CheckboxInput(attrs={

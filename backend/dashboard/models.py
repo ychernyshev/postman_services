@@ -19,7 +19,7 @@ class MailItemModel(models.Model):
     is_police_fine = models.BooleanField(default=False)
     re_entry = models.BooleanField(default=False)
     letter_image_id = models.CharField(max_length=40, blank=True)
-    date_of_receipt = models.DateTimeField(auto_now_add=True)
+    date_of_receipt = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     the_expired_date = models.DateField(auto_now=False, blank=True, null=True)
     expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 
