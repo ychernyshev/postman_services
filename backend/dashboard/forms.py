@@ -26,10 +26,8 @@ class AddMailForm(forms.Form):
                                      widget=forms.Select(attrs={
                                          'class': 'form-control right-angle'
                                      }))
-    date_of_receipt = forms.DateField(widget=AddMailDateField(attrs={
-        'class': 'form-control right-angle media-input',
-    }),
-        initial=datetime.today())
+    date_of_receipt = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle media-input'}),
+                                      initial=datetime.today())
     is_court = forms.BooleanField(label='Суд',
                                   initial=False,
                                   required=False,
