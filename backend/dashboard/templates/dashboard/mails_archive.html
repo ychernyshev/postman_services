@@ -33,7 +33,7 @@
 
     {% for item in mails_numbers %}
         <div class="row mt-3">
-            <div class="col-lg-1 text-center">
+            <div class="col-lg-2 text-center">
                 {% if item.letter_image_id %}
                     <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
                        target="_blank">
@@ -45,7 +45,7 @@
                          class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
                 {% endif %}
             </div>
-            <div class="col-lg-4 d-flex flex-row">
+            <div class="col-lg-4 d-flex flex-row align-items-center">
                 <div class="col-lg-6">
                     <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
                    class="w-100 p-3 btn button-light right-angle position-relative"
@@ -69,7 +69,7 @@
                     {% endif %}
                 </a>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 d-flex align-items-center">
                     {% if 0 < item.expired_time and item.expired_time <= 4 %}
                     <div class="p-1 bg-warning text-center">
                         <strong>Закінчується термін збереження листа</strong>
@@ -79,15 +79,15 @@
                         <strong>Останній день збереження листа</strong>
                     </div>
                 {% elif item.expired_time < 0 %}
-                    <div class="p-3 bg-secondary text-light text-center">
-                        <strong>Лист повернуто</strong>
+                    <div class="w-100 p-3 bg-secondary text-light text-center">
+                        <strong>Час збереження вичерпано</strong>
                     </div>
                 {% endif %}
                 </div>
             </div>
 
-            <div class="col-lg-2">
-                <div class="d-flex justify-content-between">
+            <div class="col-lg-2 d-flex align-items-center">
+                <div class="w-100 d-flex justify-content-between">
                     {% if item.is_court %}
                         <div class="p-3 w-100 text-center bg-body-secondary" role="alert">
                             <strong>Суд</strong>
@@ -122,9 +122,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-2 text-center">
+            <div class="col-lg-2 text-center d-flex align-items-center">
                 <a href="{% url 'dashboard:recipient_data' item.address.pk %}"
-                   class="p-3 btn btn-outline-secondary right-angle">
+                   class="w-100 p-3 btn btn-outline-secondary right-angle">
                     {{ item.address.get_street_display }} {{ item.address.build }}
                     {% if item.address.build_letter %}
                         {{ item.address.build_letter }}
@@ -137,18 +137,20 @@
             </div>
 
 
-            <div class="col-lg-3">
-                <div class="d-flex justify-content-between p-1">
+            <div class="col-lg-2 d-flex align-items-center">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-between p-1">
                             <span>
                                 <strong>Дата надходження:&nbsp;</strong>
                             </span>
-                    <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
-                </div>
-                <div class="d-flex justify-content-between p-1">
+                        <span>{{ item.date_of_receipt|date:'d.m.Y' }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between p-1">
                             <span>
                                 <strong>Збереження до:&nbsp;</strong>
                             </span>
-                    <span style="text-decoration: dotted;">{{ item.expired_date|date:'d.m.Y' }}</span>
+                        <span style="text-decoration: dotted;">{{ item.expired_date|date:'d.m.Y' }}</span>
+                    </div>
                 </div>
             </div>
         </div>
