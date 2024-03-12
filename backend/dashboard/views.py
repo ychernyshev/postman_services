@@ -37,7 +37,7 @@ def index(request):
 @login_required(login_url='account:login')
 def mails_archive(request):
     mails = MailItemModel.objects.all()
-    mails_paginator = Paginator(mails, 5)
+    mails_paginator = Paginator(mails, 2)
     mails_number = request.GET.get('page')
     mails_numbers = mails_paginator.get_page(mails_number)
 

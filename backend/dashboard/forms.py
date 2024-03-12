@@ -24,7 +24,7 @@ class AddMailForm(forms.Form):
     address = forms.ModelChoiceField(label='', empty_label='отримувач',
                                      queryset=RecipientModel.objects.all(),
                                      widget=forms.Select(attrs={
-                                         'class': 'form-control right-angle'
+                                         'class': 'form-control right-angle js-example-basic-single'
                                      }))
     date_of_receipt = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle media-input'}),
                                       initial=datetime.today())
