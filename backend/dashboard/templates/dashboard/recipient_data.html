@@ -5,9 +5,9 @@
     <div class="w-100 text-center">
         <div class="card-header">
             <strong class="display-6">
-                {{ recipient_address.get_street_display }} {{ recipient_address.build }}
+                {{ recipient_address.get_street_display }} {{ recipient_address.build  }}
                 {% if recipient_address.build_letter %}
-                    {{ recipient_address.build_letter }}
+                    {{ recipient_address.get_build_letter_display }}
                 {% endif %}
                 {% if recipient_address.apartment %}
                     /

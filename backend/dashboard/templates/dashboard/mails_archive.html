@@ -127,7 +127,7 @@
                    class="w-100 p-3 btn btn-outline-secondary right-angle">
                     {{ item.address.get_street_display }} {{ item.address.build }}
                     {% if item.address.build_letter %}
-                        {{ item.address.build_letter }}
+                        {{ item.address.get_build_letter_display }}
                     {% endif %}
                     {% if item.address.apartment %}
                         /
