@@ -51,7 +51,6 @@ def mails_archive(request):
 
 @login_required(login_url='account:login')
 def add_letter(request):
-
     if request.method == 'POST':
         form = AddMailForm(request.POST)
         if form.is_valid():
@@ -83,18 +82,17 @@ def new_recipient(request):
             build_letter = form.cleaned_data['build_letter']
             apartment = form.cleaned_data['apartment']
 
-            address_checking_list = [
-                RecipientModel.objects.filter(street=street).exists(),
-                RecipientModel.objects.filter(build=build).exists(),
-                RecipientModel.objects.filter(build_letter=build_letter).exists(),
-                RecipientModel.objects.filter(apartment=apartment).exists()
-            ]
-            if False in address_checking_list:
+            validator_str = f'{street} {build}{build_letter}/{apartment}'
+            sorted_str = []
+
+            for item in RecipientModel.objects.filter(apartment=apartment):
+                sorted_str.append(str(item))
+
+            if validator_str in sorted_str:
+                messages.info(request, 'Отримувач вже був доданий раніше')
+            else:
                 messages.success(request, 'Отримувач доданий')
                 RecipientModel.objects.create(**form.cleaned_data)
-            else:
-                messages.info(request, 'Отримувач вже був доданий раніше')
-                print(f'recipient_address: {address_checking_list}')
     else:
         form = AddNewRecipientForm()
 
