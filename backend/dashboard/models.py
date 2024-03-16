@@ -19,7 +19,7 @@ class MailItemModel(models.Model):
     is_police_fine = models.BooleanField(default=False)
     re_entry = models.BooleanField(default=False)
     letter_image_id = models.CharField(max_length=40, blank=True)
-    date_of_receipt = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    date_of_receipt = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     the_expired_date = models.DateField(auto_now=False, blank=True, null=True)
     expired_date = models.DateTimeField(default=django.utils.timezone.now(), blank=True)
 
@@ -31,11 +31,15 @@ class MailItemModel(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.track_number)
 
+        print(self.date_of_receipt)
+
         if not self._is_court and self.is_court_subpoena:
-            # self.expired_date = date_of_receipt + timedelta(days=4)
-            self.expired_date = django.utils.timezone.now() + timedelta(days=4)
+            self.expired_date = self.date_of_receipt + timedelta(days=4)
+            # self.expired_date = django.utils.timezone.now() + timedelta(days=4)
+
         else:
-            self.expired_date = django.utils.timezone.now() + timedelta(days=14)
+            self.expired_date = self.date_of_receipt + timedelta(days=14)
+            # self.expired_date = django.utils.timezone.now() + timedelta(days=14)
         super().save(*args, **kwargs)
 
     def expired_time(self):
@@ -51,10 +55,10 @@ class MailItemModel(models.Model):
 
     # def return_date_time(self):
     #     now = datetime.date.today()
-        # if not self.is_court_subpoena:
-        # return now + timedelta(days=30)
-        # elif self.is_court_subpoena:
-        #     return now + timedelta(days=3)
+    # if not self.is_court_subpoena:
+    # return now + timedelta(days=30)
+    # elif self.is_court_subpoena:
+    #     return now + timedelta(days=3)
 
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.track_number)
