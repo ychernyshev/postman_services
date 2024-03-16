@@ -83,12 +83,12 @@ def new_recipient(request):
             apartment = form.cleaned_data['apartment']
 
             validator_str = f'{street} {build}{build_letter}/{apartment}'
-            sorted_str = []
+            sorted_str_from_model = []
 
             for item in RecipientModel.objects.filter(apartment=apartment):
-                sorted_str.append(str(item))
+                sorted_str_from_model.append(str(item))
 
-            if validator_str in sorted_str:
+            if validator_str in sorted_str_from_model:
                 messages.info(request, 'Отримувач вже був доданий раніше')
             else:
                 messages.success(request, 'Отримувач доданий')
