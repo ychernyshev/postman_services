@@ -32,21 +32,9 @@
     <!--    <hr class="mb-5">-->
 
     {% for item in mails_numbers %}
-        <div class="row mt-4 mb-4 align-items-center">
-            <div class="col-lg-1 d-flex align-items-center">
-                {% if item.letter_image_id %}
-                    <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
-                       target="_blank">
-                        <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                             class="img-m rounded-5" alt="{{ item.track_number }}_image" width="100%">
-                    </a>
-                {% else %}
-                    <img src="{% static 'dashboard/images/no_image.png' %}"
-                         class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
-                {% endif %}
-            </div>
-            <div class="col-lg-3 d-flex flex-column">
-                {% if 0 < item.expired_time and item.expired_time <= 4 %}
+        <div class="row">
+            <div class="col-lg-4">
+                 {% if 0 < item.expired_time and item.expired_time <= 4 %}
                     <div class="row" style="position:relative; margin-bottom: 1.7rem">
                         <div class="col-lg-12 d-flex align-items-center"
                              style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
@@ -68,12 +56,28 @@
                     <div class="row" style="position:relative; margin-bottom: 1.7rem">
                         <div class="col-lg-12 d-flex align-items-center"
                              style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
-                            <div class="w-100 bg-secondary text-center">
+                            <div class="w-100 bg-body-secondary text-center">
                                 <strong>Час збереження вичерпано</strong>
                             </div>
                         </div>
                     </div>
                 {% endif %}
+            </div>
+        </div>
+        <div class="row mb-4 align-items-center">
+            <div class="col-lg-1 d-flex align-items-center">
+                {% if item.letter_image_id %}
+                    <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
+                       target="_blank">
+                        <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
+                             class="img-m rounded-5" alt="{{ item.track_number }}_image" width="100%">
+                    </a>
+                {% else %}
+                    <img src="{% static 'dashboard/images/no_image.png' %}"
+                         class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
+                {% endif %}
+            </div>
+            <div class="col-lg-3 d-flex flex-column">
                 <div class="d-flex flex-row align-items-center">
                     <div class="col-lg-9">
                         <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
