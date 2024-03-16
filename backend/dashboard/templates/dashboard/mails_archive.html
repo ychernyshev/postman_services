@@ -32,35 +32,7 @@
     <!--    <hr class="mb-5">-->
 
     {% for item in mails_numbers %}
-        {% if 0 < item.expired_time and item.expired_time <= 4 %}
-            <div class="row mt-3" style="position:relative">
-                <div class="col d-flex align-items-center"
-                     style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
-                    <div class="w-50     bg-warning text-center">
-                        <strong>Закінчується термін збереження листа</strong>
-                    </div>
-                </div>
-            </div>
-        {% elif item.expired_time == 0 %}
-            <div class="row mt-3" style="position:relative">
-                <div class="col d-flex align-items-center"
-                     style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
-                    <div class="w-50 bg-info text-center">
-                        <strong>Сьогодні останній день збереження листа</strong>
-                    </div>
-                </div>
-            </div>
-        {% elif item.expired_time < 0 %}
-            <div class="row mt-3" style="position:relative">
-                <div class="col d-flex align-items-center"
-                     style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
-                    <div class="w-50 bg-secondary text-light text-center">
-                        <strong>Час збереження вичерпано</strong>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        <div class="row mt-4">
+        <div class="row mt-4 mb-4 align-items-center">
             <div class="col-lg-1 d-flex align-items-center">
                 {% if item.letter_image_id %}
                     <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
@@ -73,38 +45,57 @@
                          class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
                 {% endif %}
             </div>
-            <div class="col-lg-3 d-flex flex-row align-items-center">
-                <div class="col-lg-9">
-                    <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
-                       class="w-100 p-3 btn button-light right-angle position-relative"
-                       title="Відстежити"
-                       target="_blank">
-                        {{ item.track_number }}
-                    </a>
-                </div>
-                <div class="col-lg-3">
-                    {% if item.expired_time and item.expired_time > 4 %}
+            <div class="col-lg-3 d-flex flex-column">
+                {% if 0 < item.expired_time and item.expired_time <= 4 %}
+                    <div class="row" style="position:relative; margin-bottom: 1.7rem">
+                        <div class="col-lg-12 d-flex align-items-center"
+                             style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
+                            <div class="w-100 bg-warning text-center">
+                                <strong>Закінчується термін збереження листа</strong>
+                            </div>
+                        </div>
+                    </div>
+                {% elif item.expired_time == 0 %}
+                    <div class="row" style="position:relative; margin-bottom: 1.7rem">
+                        <div class="col-lg-12 d-flex align-items-center"
+                             style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
+                            <div class="w-100 bg-info text-center">
+                                <strong>Сьогодні останній день збереження листа</strong>
+                            </div>
+                        </div>
+                    </div>
+                {% elif item.expired_time < 0 %}
+                    <div class="row" style="position:relative; margin-bottom: 1.7rem">
+                        <div class="col-lg-12 d-flex align-items-center"
+                             style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
+                            <div class="w-100 bg-secondary text-center">
+                                <strong>Час збереження вичерпано</strong>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="d-flex flex-row align-items-center">
+                    <div class="col-lg-9">
+                        <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
+                           class="w-100 p-3 btn button-light right-angle position-relative"
+                           title="Відстежити"
+                           target="_blank">
+                            {{ item.track_number }}
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        {% if item.expired_time and item.expired_time > 4 %}
                         <div class="p-3 bg-body-tertiary text-center">
                             {{ item.expired_time }}
                         </div>
-                        {#                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill#}
-                        {#                                 text-dark d-flex align-items-center justify-content-center bg-light-subtle border"#}
-                        {#                                  title="Залишок днів збереження">#}
-                        {#                                <strong style="font-size: 1.2rem"></strong>#}
-                        {#                        </span>#}
-                    {% elif 1 <= item.expired_time and item.expired_time <= 4 %}
+                        {% elif 1 <= item.expired_time and item.expired_time <= 4 %}
                         <div class="bg-warning p-3 text-center">
                             {{ item.expired_time }}
                         </div>
-                        {#                            <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-black">#}
-                        {#                            <strong style="font-size: 1.2rem"></strong>#}
-                        {#                        </span>#}
-                    {% elif item.expired_time == 0 %}
+                        {% elif item.expired_time == 0 %}
                         <div class="bg-info p-3 text-center">{{ item.expired_time }}</div>
-                        {#                            <span class="d-flex align-items-center justify-content-center position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-black">#}
-                        {#                            <strong style="font-size: 1.2rem">{{ item.expired_time }}</strong>#}
-                        {#                        </span>#}
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
                 {#                <div class="col-lg-6 d-flex align-items-center">#}
                 {#                    {% if 0 < item.expired_time and item.expired_time <= 4 %}#}
