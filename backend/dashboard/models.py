@@ -72,7 +72,7 @@ class MailItemModel(models.Model):
                 f'{self.is_police_fine}')
 
     class Meta:
-        ordering = ['-date_of_receipt']
+        ordering = ['-id']
         verbose_name = 'letter'
         verbose_name_plural = 'Letters'
 

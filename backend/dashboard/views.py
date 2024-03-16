@@ -89,7 +89,7 @@ def new_recipient(request):
                 sorted_str_from_model.append(str(item))
 
             if validator_str in sorted_str_from_model:
-                messages.info(request, 'Отримувач вже був доданий раніше')
+                messages.info(request, 'Такий отримувач вже був доданий раніше')
             else:
                 messages.success(request, 'Отримувач доданий')
                 RecipientModel.objects.create(**form.cleaned_data)
