@@ -51,6 +51,13 @@ class AddMailForm(forms.Form):
     }))
 
 
+class AddMailModelForm(forms.ModelForm):
+    class Meta:
+        model = MailItemModel
+        exclude = [
+            'slug', 'the_expired_date',
+        ]
+
 class AddNewRecipientForm(forms.Form):
     street = forms.ChoiceField(label='Вулиця',
                                choices=RecipientModel.STREET,

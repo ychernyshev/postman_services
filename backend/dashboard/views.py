@@ -1,12 +1,15 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 from .models import MailItemModel, RecipientModel
-from .forms import AddMailForm, SearchForm, AddNewRecipientForm
+from .forms import AddMailForm, SearchForm, AddNewRecipientForm, AddMailModelForm
 
 
 # Create your views here.
@@ -35,7 +38,7 @@ def index(request):
 
 
 @login_required(login_url='account:login')
-def mails_archive(request):
+def mail_archive(request):
     mails = MailItemModel.objects.all()
     mails_paginator = Paginator(mails, 20)
     mails_number = request.GET.get('page')
@@ -50,7 +53,7 @@ def mails_archive(request):
 
 
 @login_required(login_url='account:login')
-def add_letter(request):
+def add_mail(request):
     if request.method == 'POST':
         form = AddMailForm(request.POST)
         if form.is_valid():
@@ -70,6 +73,14 @@ def add_letter(request):
     }
 
     return render(request, 'dashboard/add_mail.html', context=context)
+
+
+class MailUpdateView(SuccessMessageMixin, UpdateView):
+    model = MailItemModel
+    form_class = AddMailModelForm
+    template_name = 'dashboard/update_mail.html'
+    # success_message = 'Дані листа оновлено'
+    success_url = reverse_lazy('dashboard:mail_archive')
 
 
 @login_required(login_url='account:login')
