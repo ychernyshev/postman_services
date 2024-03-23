@@ -58,6 +58,7 @@ class AddMailModelForm(forms.ModelForm):
             'slug', 'the_expired_date',
         ]
 
+
 class AddNewRecipientForm(forms.Form):
     street = forms.ChoiceField(label='Вулиця',
                                choices=RecipientModel.STREET,
@@ -81,3 +82,11 @@ class AddNewRecipientForm(forms.Form):
                                      widget=forms.TextInput(attrs={
                                          'class': 'form-control right-angle',
                                      }))
+
+
+class RecipientEditModelForm(forms.ModelForm):
+    class Meta:
+        model = RecipientModel
+        fields = [
+            'street', 'build', 'build_letter', 'apartment', 'company_name'
+        ]

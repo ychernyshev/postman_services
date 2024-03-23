@@ -89,8 +89,6 @@ class MailItemModel(models.Model):
 
 
 class RecipientModel(models.Model):
-    # recipient_name = models.CharField(max_length=45)
-
     STREET = [
         ('STR', 'Стрийська'),
         ('MKL', 'Мікльоша'),

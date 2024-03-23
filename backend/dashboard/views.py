@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from .models import MailItemModel, RecipientModel
-from .forms import AddMailForm, SearchForm, AddNewRecipientForm, AddMailModelForm
+from .forms import AddMailForm, SearchForm, AddNewRecipientForm, AddMailModelForm, RecipientEditModelForm
 
 
 # Create your views here.
@@ -112,6 +112,14 @@ def new_recipient(request):
     }
 
     return render(request, 'dashboard/new_recipient.html', context=context)
+
+
+class RecipientEditUpdateView(SuccessMessageMixin, UpdateView):
+    model = RecipientModel
+    form_class = RecipientEditModelForm
+    template_name = 'dashboard/recipient_edit.html'
+    success_message = 'Дані отримувача були оновлені'
+    success_url = reverse_lazy('dashboard:mail_archive')
 
 
 @login_required(login_url='account:login')
