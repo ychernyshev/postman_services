@@ -69,7 +69,7 @@
                     <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
                        target="_blank">
                         <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                             class="img-m rounded-5" alt="{{ item.track_number }}_image" width="100%">
+                             class="img-m" alt="{{ item.track_number }}_image" width="100%">
                     </a>
                 {% else %}
                     <img src="{% static 'dashboard/images/no_image.png' %}"
