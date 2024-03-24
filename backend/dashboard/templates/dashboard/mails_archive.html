@@ -55,7 +55,7 @@
                     <div class="row" style="position:relative; margin-bottom: 1.7rem">
                         <div class="col-lg-12 d-flex align-items-center"
                              style="position: absolute; top: 0; left: 0; margin-bottom: 1rem">
-                            <div class="w-100 bg-body-secondary text-center">
+                            <div class="w-100 bg-body-tertiary text-center">
                                 <strong>Час збереження листа вичерпано</strong>
                             </div>
                         </div>
@@ -66,11 +66,13 @@
         <div class="row mb-4 align-items-center">
             <div class="col-lg-1 d-flex align-items-center">
                 {% if item.letter_image_id %}
-                    <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
+                    <div style="width: 100%; height: 3.5rem">
+                        <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link"
                        target="_blank">
-                        <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                             class="img-m" alt="{{ item.track_number }}_image" width="100%">
-                    </a>
+                            <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
+                                 class="img-m rounded-2" alt="{{ item.track_number }}_image" style="width: 100%; height: 100%; object-fit:  cover">
+                        </a>
+                    </div>
                 {% else %}
                     <img src="{% static 'dashboard/images/no_image.png' %}"
                          class="img-thumbnail right-angle" alt="{{ item.track_number }}_image" width="100%">
@@ -114,34 +116,19 @@
                         {% endif %}
                     </div>
                 </div>
-                {#                <div class="col-lg-6 d-flex align-items-center">#}
-                {#                    {% if 0 < item.expired_time and item.expired_time <= 4 %}#}
-                {#                        <div class="p-1 bg-warning text-center">#}
-                {#                            <strong>Закінчується термін збереження листа</strong>#}
-                {#                        </div>#}
-                {#                    {% elif item.expired_time == 0 %}#}
-                {#                        <div class="p-1 bg-info text-center">#}
-                {#                            <strong>Сьогодні останній день збереження листа</strong>#}
-                {#                        </div>#}
-                {#                    {% elif item.expired_time < 0 %}#}
-                {#                        <div class="w-100 p-3 bg-secondary text-light text-center">#}
-                {#                            <strong>Час збереження вичерпано</strong>#}
-                {#                        </div>#}
-                {#                    {% endif %}#}
-                {#                </div>#}
             </div>
 
             <div class="col-lg-3 d-flex align-items-center">
                 <div class="w-100 d-flex justify-content-between">
                     {% if item.is_court %}
-                        <div class="p-3 w-100 text-center bg-body-secondary" role="alert">
+                        <div class="p-3 w-100 text-center bg-body-tertiary" role="alert">
                             <strong>Суд</strong>
                         </div>
                     {% endif %}
 
                     {% if item.is_court_subpoena %}
                         <div class="col-lg-6">
-                            <div class="p-3 text-center bg-body-secondary"
+                            <div class="p-3 text-center bg-body-tertiary"
                                  role="alert">
                                 <strong>Суд</strong>
                             </div>
