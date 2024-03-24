@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django import forms
+from django.forms import TextInput
 
 from .models import RecipientModel, MailItemModel
 
@@ -77,7 +78,7 @@ class AddNewRecipientForm(forms.Form):
     apartment = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={
         'class': 'form-control right-angle media-input', 'placeholder': '№ квартири'
     }))
-    company_name = forms.ChoiceField(label='Назва фірми (оціонально)',
+    company_name = forms.ChoiceField(label='Назва фірми (опціонально)',
                                      required=False,
                                      widget=forms.TextInput(attrs={
                                          'class': 'form-control right-angle',
@@ -85,8 +86,34 @@ class AddNewRecipientForm(forms.Form):
 
 
 class RecipientEditModelForm(forms.ModelForm):
+    street = forms.ChoiceField(label='Вулиця',
+                               choices=RecipientModel.STREET,
+                               widget=forms.Select(attrs={
+                                   'class': 'form-control right-angle',
+                               }))
+    build = forms.ChoiceField(label='№ будинку (Літери немає по замовченню)',
+                              choices=RecipientModel.BUILD,
+                              widget=forms.Select(attrs={
+                                  'class': 'form-control right-angle media-input media-input'}))
+    build_letter = forms.ChoiceField(label='Літера будинку (Літери немає по замовченню)',
+                                     choices=RecipientModel.BUILD_LETTER,
+                                     required=False,
+                                     widget=forms.Select(attrs={
+                                         'class': 'form-control right-angle media-input media-input'}))
+    apartment = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control right-angle media-input', 'placeholder': '№ квартири'
+    }))
+    company_name = forms.ChoiceField(label='Назва фірми (опціонально)',
+                                     required=False,
+                                     widget=forms.TextInput(attrs={
+                                         'class': 'form-control right-angle',
+                                     }))
+
     class Meta:
         model = RecipientModel
         fields = [
             'street', 'build', 'build_letter', 'apartment', 'company_name'
         ]
+        widgets = {
+            'street': TextInput(attrs={'class': 'form-control right-angle'})
+        }
