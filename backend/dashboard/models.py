@@ -142,7 +142,12 @@ class RecipientModel(models.Model):
     # mail_item = models.CharField(MailItemModel, db_index=True, on_delete=models.PROTECT)
 
     def __str__(self):
-        return f'{self.street} {self.build}{self.build_letter}/{self.apartment}'
+        if self.build_letter is None:
+            return f'{self.get_street_display()} {self.build}/{self.apartment}'
+        elif self.build_letter is None and self.apartment is None:
+            return f'{self.get_street_display()} {self.build}'
+        else:
+            return f'{self.get_street_display()} {self.build}{self.get_build_letter_display()}/{self.apartment}'
 
     class Meta:
         ordering = ['-id']
