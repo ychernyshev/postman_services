@@ -11,15 +11,15 @@
 </head>
 <body style="background: #F7F8FA" class="h-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-4">
-        <div class="container-fluid">
+        <div class="container-fluid d-flex flex-row">
             {% include 'dashboard/inc/_logo.html' %}
-        </div>
-        <div class="col-lg-6 p-2 d-flex flex-row justify-content-end mx-auto">
-            <a href="{% url 'dashboard:mail_archive' %}"
-               class="btn btn-outline-secondary right-angle d-flex align-items-center p-3">Архів
-                записів</a>
-            <a href="{% url 'dashboard:dashboard' %}" style="margin-left: 1rem"
-               class="text-secondary underline-none d-flex align-items-center">Панель керування</a>
+                <div class="col-lg-10 col-sm-8 p-2 d-flex flex-row justify-content-end mx-auto">
+                <a href="{% url 'dashboard:mail_archive' %}"
+                   class="btn btn-outline-secondary right-angle d-flex align-items-center p-3">Архів
+                    записів</a>
+                <a href="{% url 'dashboard:add_mail' %}" style="margin-left: 1rem"
+                   class="text-secondary underline-none d-flex align-items-center">Додати лист</a>
+            </div>
         </div>
     </nav>
     {% block content %}{% endblock %}

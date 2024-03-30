@@ -10,10 +10,10 @@
                     {% include 'accounts/inc/_message.html' %}
                     <form action="{% url 'dashboard:search_results' %}" method="get" class="mx-auto">
                         <div class="d-flex flex-row">
-                            <div class="col-lg-10">
+                            <div class="col-lg-10 col-sm-10">
                                 {{ user_search.query }}
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 col-sm-2">
                                 <button class="p-3 w-100 btn button-blue my-2 my-sm-0 right-angle outline mobile-text"
                                         type="submit">
                                     Знайти
