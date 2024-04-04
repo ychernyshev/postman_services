@@ -63,7 +63,7 @@ def add_mail(request):
             else:
                 MailItemModel.objects.create(**form.cleaned_data)
                 messages.success(request, 'Лист був збережений')
-                return redirect('dashboard:add_letter')
+                return redirect('dashboard:add_mail')
     else:
         form = AddMailForm()
 
