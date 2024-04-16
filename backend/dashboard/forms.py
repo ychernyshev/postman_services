@@ -82,6 +82,7 @@ class AddNewRecipientForm(forms.Form):
                                      required=False,
                                      widget=forms.TextInput(attrs={
                                          'class': 'form-control right-angle',
+                                         'placeholder': 'Назва фірми (опціонально)'
                                      }))
 
 

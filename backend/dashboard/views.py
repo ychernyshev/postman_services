@@ -34,7 +34,7 @@ def search_engine(request):
 
 @login_required(login_url='account:login')
 def index(request):
-    return render(request, 'dashboard/index.html')
+    return render(request, 'dashboard/dashboard.html')
 
 
 @login_required(login_url='account:login')
