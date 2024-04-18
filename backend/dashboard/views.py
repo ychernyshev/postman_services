@@ -33,7 +33,7 @@ def search_engine(request):
 
 
 @login_required(login_url='account:login')
-def index(request):
+def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
 
