@@ -30,13 +30,13 @@
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="row">
               <div class="col-sm-4">
-                <a href="" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-secondary">Зведені дані</a>
+                <a href="{% url 'dashboard:dashboard' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-secondary">Зведені дані</a>
               </div>
               <div class="col-sm-4">
-                <a href="" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-info">Архів листів</a>
+                <a href="{% url 'dashboard:mail_archive' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-info">Архів листів</a>
               </div>
               <div class="col-sm-4">
-                <a href="" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-success">Додати лист</a>
+                <a href="{% url 'dashboard:add_mail' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-success">Додати лист</a>
               </div>
             </div>
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
