@@ -29,7 +29,7 @@ def search_engine(request):
                 'wanted_letter': wanted_letter,
             }
 
-        return render(request, 'dashboard/search/search_results.html', context=context)
+        return render(request, 'dashboard/search_results.html', context=context)
 
 
 @login_required(login_url='account:login')

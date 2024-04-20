@@ -42,10 +42,13 @@
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
               <div class="input-group">
                 <div class="d-flex flex-row">
-                    <button type="submit" class="input-group-text text-body border-radius-top-end-0 border-radius-bottom-end-0">
-                      <i class="fas fa-search" aria-hidden="true"></i>
-                    </button>
-                    {{ search_form.query }}
+                    <form action="{% url 'dashboard:search_results' %}" method="get" class="d-flex flex-row">
+                      {% csrf_token %}
+                      <button type="submit" class="input-group-text text-body border-radius-top-end-0 border-radius-bottom-end-0">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                      </button>
+                      {{ search_form.query }}
+                    </form>
                   </div>
               </div>
             </div>
