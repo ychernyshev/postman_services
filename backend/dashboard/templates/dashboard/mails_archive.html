@@ -27,9 +27,11 @@
                       <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column text-center">
-                              <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                                   class="avatar avatar-sm me-0"
-                                   alt="{{ item.track_number }}_image">
+                              <a href="https://drive.google.com/file/d/{{ item.letter_image_id }}/view?usp=drive_link" target="_blank">
+                                <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
+                               class="avatar avatar-sm me-0"
+                               alt="{{ item.track_number }}_image">
+                            </a>
                               <a href="{% url 'dashboard:update_mail' slug=item.slug %}" class="text-secondary">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5zM3 3H2v1h1z"/>
