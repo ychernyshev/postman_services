@@ -78,7 +78,7 @@ class AddNewRecipientForm(forms.Form):
     apartment = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={
         'class': 'form-control right-angle media-input', 'placeholder': '№ квартири'
     }))
-    company_name = forms.ChoiceField(label='Назва фірми (опціонально)',
+    company_name = forms.CharField(label='Назва фірми (опціонально)',
                                      required=False,
                                      widget=forms.TextInput(attrs={
                                          'class': 'form-control right-angle',

@@ -30,10 +30,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '192.168.0.103',
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    'localhost:8000',
     '192.168.0.103:8000',
 ]
 

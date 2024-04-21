@@ -44,7 +44,7 @@ def letters_archive(request):
         'letters_numbers': letters_numbers,
     }
 
-    return render(request, 'dashboard/mails_archive.html', context=context)
+    return render(request, 'dashboard/mail_archive.html', context=context)
 
 
 def add_letter(request):
@@ -92,7 +92,7 @@ def new_recipient(request):
         'form': form,
     }
 
-    return render(request, 'dashboard/new_recipient.html', context=context)
+    return render(request, 'dashboard/add_recipient.html', context=context)
 
 
 def recipient_data(request, pk=None):

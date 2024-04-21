@@ -49,7 +49,7 @@ def mail_archive(request):
         'mails_numbers': mails_numbers,
     }
 
-    return render(request, 'dashboard/mails_archive.html', context=context)
+    return render(request, 'dashboard/mail_archive.html', context=context)
 
 
 @login_required(login_url='account:login')
@@ -84,7 +84,7 @@ class MailUpdateView(SuccessMessageMixin, UpdateView):
 
 
 @login_required(login_url='account:login')
-def new_recipient(request):
+def add_recipient(request):
     if request.method == 'POST':
         form = AddNewRecipientForm(request.POST)
         if form.is_valid():
@@ -111,7 +111,7 @@ def new_recipient(request):
         'form': form,
     }
 
-    return render(request, 'dashboard/new_recipient.html', context=context)
+    return render(request, 'dashboard/add_recipient.html', context=context)
 
 
 class RecipientEditUpdateView(SuccessMessageMixin, UpdateView):

@@ -143,11 +143,12 @@ class RecipientModel(models.Model):
 
     def __str__(self):
         if self.build_letter is None:
-            return f'{self.get_street_display()} {self.build}/{self.apartment}'
+            return f'{self.get_street_display()} {self.build}/{self.apartment} {self.company_name}'
         elif self.build_letter is None and self.apartment is None:
-            return f'{self.get_street_display()} {self.build}'
+            return f'{self.get_street_display()} {self.build} {self.company_name}'
         else:
-            return f'{self.get_street_display()} {self.build}{self.get_build_letter_display()}/{self.apartment}'
+            return (f'{self.get_street_display()} {self.build}{self.get_build_letter_display()}/{self.apartment} '
+                    f'{self.company_name}')
 
     class Meta:
         ordering = ['-id']
