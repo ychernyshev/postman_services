@@ -52,7 +52,40 @@ class AddMailForm(forms.Form):
     }))
 
 
-class AddMailModelForm(forms.ModelForm):
+class UpdateMailModelForm(forms.ModelForm):
+    track_number = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control right-angle',
+        'placeholder': 'Номер відстеження',
+    }))
+    address = forms.ModelChoiceField(label='', empty_label='отримувач',
+                                     queryset=RecipientModel.objects.all(),
+                                     widget=forms.Select(attrs={
+                                         'class': 'form-control right-angle js-example-basic-single'
+                                     }))
+    date_of_receipt = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle media-input'}),
+                                      initial=datetime.today())
+    is_court = forms.BooleanField(label='Суд',
+                                  initial=False,
+                                  required=False,
+                                  widget=forms.CheckboxInput(attrs={
+                                      'class': 'form-check-input right-angle media-input'
+                                  }))
+    # the_expired_date = forms.DateField(widget=AddMailDateField(attrs={'class': 'form-control right-angle'}))
+    is_court_subpoena = forms.BooleanField(label='Повістка',
+                                           initial=False, required=False,
+                                           widget=forms.CheckboxInput(attrs={
+                                               'class': 'form-check-input right-angle media-input'
+                                           }))
+    is_police_fine = forms.BooleanField(label='Поліцейський штраф',
+                                        initial=False, required=False,
+                                        widget=forms.CheckboxInput(attrs={
+                                            'class': 'form-check-input right-angle media-input'
+                                        }))
+    letter_image_id = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'class': 'form-control right-angle',
+        'placeholder': 'ID фото',
+    }))
+
     class Meta:
         model = MailItemModel
         exclude = [
