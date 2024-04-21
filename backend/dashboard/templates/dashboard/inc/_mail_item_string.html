@@ -95,6 +95,9 @@
         <span class="text-secondary text-xs font-weight-bold">{{ item.date_of_receipt|date:'d.m.Y' }} - {{ item.expired_date|date:'d.m.Y' }}</span>
     </td>
     <td class="align-middle">
-        <span class="badge badge-sm bg-gradient-secondary">Видати</span>
+        {% if item.expired_time >= 0 %}
+            <span class="badge badge-sm bg-gradient-secondary">Видати</span>
+        {% elif item.expired_time < 0 %}
+        {% endif %}
     </td>
 </tr>
