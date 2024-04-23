@@ -46,24 +46,6 @@ class MailItemModel(models.Model):
         ex_time = self.expired_date.date() - datetime.today().date()
         return ex_time.days
 
-    # def save(self, *args, **kwargs):
-    #     if self.is_court_subpoena and self.expired_date is None:
-    #         self.expired_date = datetime.date.  today() + timedelta(days=30)
-    #     elif not self.is_court_subpoena and self.expired_date is None:
-    #         self.expired_date = datetime.date.today() + timedelta(days=3)
-    #     super().save(*args, **kwargs)
-
-    # def return_date_time(self):
-    #     now = datetime.date.today()
-    # if not self.is_court_subpoena:
-    # return now + timedelta(days=30)
-    # elif self.is_court_subpoena:
-    #     return now + timedelta(days=3)
-
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.track_number)
-    #     super(LetterItemModel, self).save(*args, **kwargs)
-
     def __str__(self):
         return (f'{self.date_of_receipt} | '
                 f'{self.track_number} | '
@@ -75,17 +57,6 @@ class MailItemModel(models.Model):
         ordering = ['-id']
         verbose_name = 'letter'
         verbose_name_plural = 'Letters'
-
-
-# class SenderModel(models.Model):
-#     sender_name = models.CharField(max_length=45)
-#
-#     def __str__(self):
-#         return self.sender_name
-#
-#     class Meta:
-#         verbose_name = 'sender'
-#         verbose_name_plural = 'Senders'
 
 
 class RecipientModel(models.Model):
