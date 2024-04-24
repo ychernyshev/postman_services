@@ -15,32 +15,37 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{% static 'dashboard/assets/css/soft-ui-dashboard.min.css' %}" rel="stylesheet" />
 
-<!--    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">-->
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
 <!--    <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">-->
 <!--    <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">-->
+
+  <style>
+    .btn-wight-33 {
+      wight: 33%
+    }
+  </style>
 </head>
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-gray-100">
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
       <!-- Navbar -->
       <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Сторінки</a></li>
+              <li class="breadcrumb-item text-sm"><a
+                      class="opacity-5 text-dark rounded-top"
+                      style="border-radius: 0;"
+                      href="javascript:;">Сторінки</a></li>
               <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Зведені дані</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Зведені дані</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="row">
-              <div class="col-sm-4">
-                <a href="{% url 'dashboard:dashboard' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-secondary">Зведені дані</a>
-              </div>
-              <div class="col-sm-4">
-                <a href="{% url 'dashboard:mail_archive' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-info">Архів листів</a>
-              </div>
-              <div class="col-sm-4">
-                <a href="{% url 'dashboard:add_mail' %}" style="width: 100%" class="p-3 badge btn btn-block bg-gradient-success">Додати лист</a>
+            <div class="row mt-3">
+              <div class="col-sm-12 d-flex flex-row">
+                <a href="{% url 'dashboard:dashboard' %}" class="p-3 btn bg-gradient-secondary right-angle rounded-start">Зведені дані</a>
+                <a href="{% url 'dashboard:mail_archive' %}" class="p-3 btn bg-gradient-info right-angle">Архів листів</a>
+                <a href="{% url 'dashboard:add_mail' %}" class="p-3 btn bg-gradient-success right-angle rounded-end">Додати лист</a>
               </div>
             </div>
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
