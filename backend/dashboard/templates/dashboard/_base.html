@@ -42,11 +42,7 @@
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="row mt-3">
-              <div class="col-sm-12 d-flex flex-row">
-                <a href="{% url 'dashboard:dashboard' %}" class="p-3 btn bg-gradient-secondary right-angle rounded-start">Зведені дані</a>
-                <a href="{% url 'dashboard:mail_archive' %}" class="p-3 btn bg-gradient-info right-angle">Архів листів</a>
-                <a href="{% url 'dashboard:add_mail' %}" class="p-3 btn bg-gradient-success right-angle rounded-end">Додати лист</a>
-              </div>
+                {% include 'dashboard/inc/_the_main_menu_button_group.html' %}
             </div>
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
               <div class="input-group">
