@@ -7,15 +7,15 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="{% static 'dashboard/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
-    <link href="{% static 'dashboard/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{% static 'dashboard/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="{% static 'dashboard/assets/css/soft-ui-dashboard.min.css' %}" rel="stylesheet" />
+    <link id="pagestyle" href="{% static 'assets/css/soft-ui-dashboard.min.css' %}" rel="stylesheet" />
 
-    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 <!--    <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">-->
 <!--    <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">-->
 
@@ -36,9 +36,9 @@
                       class="opacity-5 text-dark rounded-top"
                       style="border-radius: 0;"
                       href="javascript:;">Сторінки</a></li>
-              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Зведені дані</li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ title }}</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Зведені дані</h6>
+            <h6 class="font-weight-bolder mb-0">{{ title }}</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="row mt-3">
@@ -149,11 +149,11 @@
     </main>
 
     <!--   Core JS Files   -->
-    <script src="{% static 'dashboard/assets/js/core/popper.min.js' %}"></script>
-    <script src="{% static 'dashboard/assets/js/core/bootstrap.min.js' %}"></script>
-    <script src="{% static 'dashboard/assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
-    <script src="{% static 'dashboard/assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
-    <script src="{% static 'dashboard/assets/js/plugins/chartjs.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/chartjs.min.js' %}"></script>
     <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -336,6 +336,6 @@
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{% static 'dashboard/assets/js/soft-ui-dashboard.js' %}"></script>
+    <script src="{% static 'assets/js/soft-ui-dashboard.js' %}"></script>
 </body>
 </html>
