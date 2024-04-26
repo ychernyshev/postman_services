@@ -38,21 +38,12 @@
                 </div>
             </nav>
         <!-- End Navbar -->
-
         <div class="container-fluid">
             <div style="height: 40vh" class="row justify-content-center align-items-center">
                 <div class="col-6">
                     <div class="card mb-4" style="padding: 0 .5rem 0 .5rem">
                         <div class="card-body px-0 pt-0 pb-2">
-                            <form action="{% url 'dashboard:search' %}" method="get" class="mx-auto mt-2">
-                                <div class="d-flex flex-row">
-                                    <button class="btn button-success my-2 my-sm-0 outline mobile-text rounded-end-5"
-                                            type="submit">
-                                        <i class="fas fa-search" aria-hidden="true"></i>
-                                    </button>
-                                    {{ search_form.query }}
-                                </div>
-                            </form>
+                            {% include 'dashboard/inc/_simple_search.html' %}
                         </div>
                     </div>
                 </div>

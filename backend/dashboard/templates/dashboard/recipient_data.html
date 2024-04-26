@@ -41,9 +41,9 @@
                             </thead>
                             <tbody>
                             {% for mail in recipient_data %}
-                            {% for item in mail.address_mails.all %}
-                            {% include 'dashboard/inc/_mail_item_string.html' %}
-                            {% endfor %}
+                                {% for item in mail.address_mails.all %}
+                                    {% include 'dashboard/inc/_mail_item_string.html' %}
+                                {% endfor %}
                             {% endfor %}
                             </tbody>
                         </table>
