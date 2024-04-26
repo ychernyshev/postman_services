@@ -26,6 +26,7 @@ def search_engine(request):
             )
 
             context = {
+                'title': 'Результати пошуку',
                 'query': query,
                 'wanted_letter': wanted_letter,
             }
@@ -57,7 +58,11 @@ def simple_search(request):
 
 @login_required(login_url='account:login')
 def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
+    context = {
+        'title': 'Зведені дані',
+    }
+
+    return render(request, 'dashboard/dashboard.html', context=context)
 
 
 @login_required(login_url='account:login')
@@ -68,6 +73,7 @@ def mail_archive(request):
     mails_numbers = mails_paginator.get_page(mails_number)
 
     context = {
+        'title': 'Архів листів',
         'mails': mails,
         'mails_numbers': mails_numbers,
     }
@@ -91,6 +97,7 @@ def add_mail(request):
         form = AddMailForm()
 
     context = {
+        'title': 'Дадавання листа',
         'form': form,
         'letters': MailItemModel.objects.all()[:1],
     }
@@ -131,6 +138,7 @@ def add_recipient(request):
         form = AddNewRecipientForm()
 
     context = {
+        'title': 'Дадавання отримувача',
         'form': form,
     }
 
@@ -154,6 +162,7 @@ def recipient_data(request, pk=None):
     recipient_data_numbers = recipient_data_paginator.get_page(recipient_data_number)
 
     context = {
+        'title': 'Дані отримувача',
         'recipient_address': recipient_address,
         'recipient_data': recipient_data,
         'recipient_data_numbers': recipient_data_numbers
