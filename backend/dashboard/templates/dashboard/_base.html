@@ -16,17 +16,9 @@
     <link id="pagestyle" href="{% static 'assets/css/soft-ui-dashboard.min.css' %}" rel="stylesheet" />
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<!--    <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">-->
-<!--    <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">-->
-
-  <style>
-    .btn-wight-33 {
-      wight: 33%
-    }
-  </style>
 </head>
 <body class="g-sidenav-show bg-gray-100">
-    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
       <!-- Navbar -->
       <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
@@ -145,6 +137,7 @@
         </div>
       </nav>
       <!-- End Navbar -->
+
       {% block content %}{% endblock %}
     </main>
 

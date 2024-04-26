@@ -34,8 +34,16 @@ def search_engine(request):
         return render(request, 'dashboard/search_results.html', context=context)
 
 
-@login_required(login_url='account:login')
 def simple_search(request):
+    context = {
+        'title': 'Пошук'
+    }
+
+    return render(request, 'dashboard/simple_search.html', context=context)
+
+
+@login_required(login_url='account:login')
+def simple_search_results(request):
     if request.method == 'GET':
         form = SimpleSearchForm(request.GET)
         context = {}
