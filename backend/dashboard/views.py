@@ -9,7 +9,8 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from .models import MailItemModel, RecipientModel
-from .forms import AddMailForm, SearchForm, AddNewRecipientForm, RecipientEditModelForm, UpdateMailModelForm
+from .forms import AddMailForm, SearchForm, AddNewRecipientForm, RecipientEditModelForm, UpdateMailModelForm, \
+    SimpleSearchForm
 
 
 # Create your views here.
@@ -30,6 +31,28 @@ def search_engine(request):
             }
 
         return render(request, 'dashboard/search_results.html', context=context)
+
+
+@login_required(login_url='account:login')
+def simple_search(request):
+    if request.method == 'GET':
+        form = SimpleSearchForm(request.GET)
+        context = {}
+
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            wanted_letter = MailItemModel.objects.filter(
+                Q(track_number__icontains=query) |
+                Q(date_of_receipt__icontains=query)
+            )
+
+            context.update({
+                'title': 'Пошук',
+                'query': query,
+                'wanted_letter': wanted_letter,
+            })
+
+        return render(request, 'dashboard/simple_search_results.html', context=context)
 
 
 @login_required(login_url='account:login')
