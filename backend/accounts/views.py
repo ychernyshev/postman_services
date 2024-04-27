@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -47,4 +47,9 @@ def admin_login(request):
     }
 
     return render(request, 'accounts/login.html', context=context)
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('accounts:login')
 

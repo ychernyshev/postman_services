@@ -117,7 +117,7 @@ class MailUpdateView(SuccessMessageMixin, UpdateView):
     model = MailItemModel
     form_class = UpdateMailModelForm
     template_name = 'dashboard/update_mail.html'
-    # success_message = 'Дані листа оновлено'
+    success_message = 'Дані листа оновлено'
     success_url = reverse_lazy('dashboard:mail_archive')
 
 
