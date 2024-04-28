@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {{ title }} {% endblock %}</title>
-    <link type="text/css" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
-    <link type="text/css" href="{% static 'dashboard/css/media.css' %}">
-    <link type="text/css" href="{% static 'dashboard/css/style.css' %}">
-    <link type="text/css" href="{% static 'dashboard/css/colors.css' %}">
-    <link type="text/css" href="{% static 'dashboard/css/buttons.css' %}">
+    <link type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link type="text/css" href="{% static 'css/media.css' %}">
+    <link type="text/css" href="{% static 'css/style.css' %}">
+    <link type="text/css" href="{% static 'css/colors.css' %}">
+    <link type="text/css" href="{% static 'css/buttons.css' %}">
 </head>
 <body style="background: #F7F8FA" class="h-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-4">
@@ -19,6 +19,6 @@
     </nav>
     {% block content %}{% endblock %}
 
-    <script type="text/javascript" src="{% static 'dashboard/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
