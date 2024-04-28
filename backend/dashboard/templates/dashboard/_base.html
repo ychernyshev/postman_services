@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{{ title }}{% endblock %}</title>
+    <link href="{% static 'select2/css/select2.min.css' %" rel="stylesheet" />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <!-- Nucleo Icons -->
@@ -330,5 +331,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script type="text/javascript" src="{% static 'assets/js/soft-ui-dashboard.js' %}"></script>
+    <script src="{% static 'select2/js/jquery-3.7.0.slim.min.js"></script>
+    <script type="text/javascript" src="{% static 'select2/js/select2.min.js' %"></script>
 </body>
 </html>
