@@ -31,12 +31,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     '192.168.0.103',
     '192.168.0.104',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'localhost:8000',
+    '127.0.0.1:8000',
     '192.168.0.103:8000',
 ]
 
