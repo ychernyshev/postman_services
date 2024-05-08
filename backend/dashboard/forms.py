@@ -8,7 +8,7 @@ from .models import RecipientModel, MailItemModel
 
 class SearchForm(forms.Form):
     query = forms.CharField(label='', widget=forms.TextInput(attrs={
-        'class': 'form-control right-angle border-radius-top-start-5 border-radius-bottom-start-0',
+        'class': 'form-control right-angle rounded-start-5',
         'placeholder': 'Пошуковий запит...', 'aria-label': 'search'
     }))
 

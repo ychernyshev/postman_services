@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">
     <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/media.css' %}">
     <!-- Nucleo Icons -->
     <link href="{% static 'dashboard/assets/css/nucleo-icons.css' %}" type="text/css"/>
     <link href="{% static 'dashboard/assets/css/nucleo-svg.css' %}" type="text/css"/>
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background: #F8F9FA">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         {% include 'dashboard/inc/_logo.html' %}
@@ -22,23 +23,26 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
-            <li class="nav-item">
-              <a href="{% url 'dashboard:dashboard' %}" class="p-3 btn button-gradient-secondary right-angle rounded-start text-light text-uppercase bold text-2 border-0">
-                  Зведені дані
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'dashboard:mail_archive' %}" class="p-3 btn button-gradient-primary right-angle text-light text-uppercase bold text-2 border-0">Архів листів</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'dashboard:add_mail' %}" class="p-3 btn button-gradient-success right-angle rounded-end text-light text-uppercase bold text-2 border-0">Додати лист</a>
-            </li>
-          </ul>
-          <div class="mx-auto">
-              {% include 'dashboard/inc/_simple_search.html' %}
+            <div style="margin-top: -.5rem; width: 80vh" class="mx-auto">
+            {% include 'dashboard/inc/_simple_search.html' %}
           </div>
-            <nav aria-label="breadcrumb">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto media-margin-top-1">
+              {% include 'dashboard/inc/_the_main_menu_button_group.html' %}
+          </div>
+<!--          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">-->
+<!--            <li class="nav-item">-->
+<!--              <a href="{% url 'dashboard:dashboard' %}" class="p-3 btn button-gradient-secondary right-angle rounded-start text-light text-uppercase bold text-2 border-0">-->
+<!--                  Зведені дані-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a href="{% url 'dashboard:mail_archive' %}" class="p-3 btn button-gradient-primary right-angle text-light text-uppercase bold text-2 border-0">Архів листів</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a href="{% url 'dashboard:add_mail' %}" class="p-3 btn button-gradient-success right-angle rounded-end text-light text-uppercase bold text-2 border-0">Додати лист</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+          <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
               <li class="breadcrumb-item text-sm"><a
                       class="opacity-5 text-dark rounded-top"
