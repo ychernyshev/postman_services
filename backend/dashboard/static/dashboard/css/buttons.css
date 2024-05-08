@@ -102,3 +102,15 @@
     background: #01EA6E;
     color: #ffffff;
 }
+
+.button-gradient-primary {
+    background: linear-gradient(to right, #21C3FD, #206DF9)
+}
+
+.button-gradient-secondary {
+    background: linear-gradient(to right, #9EAECE, #6D7F9D)
+}
+
+.button-gradient-success {
+    background: linear-gradient(to right, #80E02F, #36BC35)
+}

@@ -39,7 +39,7 @@ def simple_search(request):
         'title': 'Пошук'
     }
 
-    return render(request, 'dashboard/simple_search.html', context=context)
+    return render(request, 'dashboard/search_alternate.html', context=context)
 
 
 @login_required(login_url='account:login')
@@ -56,7 +56,7 @@ def simple_search_results(request):
             )
 
             context.update({
-                'title': 'Пошук',
+                'title': 'Пошуковий результат',
                 'query': query,
                 'wanted_letter': wanted_letter,
             })

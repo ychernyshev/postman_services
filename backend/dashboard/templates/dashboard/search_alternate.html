@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/colors.css' %}">
+    <!-- Nucleo Icons -->
+    <link href="{% static 'dashboard/assets/css/nucleo-icons.css' %}" type="text/css"/>
+    <link href="{% static 'dashboard/assets/css/nucleo-svg.css' %}" type="text/css"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        {% include 'dashboard/inc/_logo.html' %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+            <li class="nav-item">
+              <a href="{% url 'dashboard:dashboard' %}" class="p-3 btn button-gradient-secondary right-angle rounded-start text-light text-uppercase bold text-2 border-0">
+                  Зведені дані
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:mail_archive' %}" class="p-3 btn button-gradient-primary right-angle text-light text-uppercase bold text-2 border-0">Архів листів</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'dashboard:add_mail' %}" class="p-3 btn button-gradient-success right-angle rounded-end text-light text-uppercase bold text-2 border-0">Додати лист</a>
+            </li>
+          </ul>
+          <div class="mx-auto">
+              {% include 'dashboard/inc/_simple_search.html' %}
+          </div>
+            <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+              <li class="breadcrumb-item text-sm"><a
+                      class="opacity-5 text-dark rounded-top"
+                      style="border-radius: 0;"
+                      href="javascript:;">Сторінки</a></li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ title }}</li>
+            </ol>
+            <h4 class="font-weight-bolder mb-0">{{ title }}</h4>
+          </nav>
+        </div>
+      </div>
+    </nav>
+
+    <script src="{% static 'dashboard/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

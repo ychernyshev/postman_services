@@ -5,191 +5,72 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <strong class="display-6">
-                        {{ recipient_address.get_street_display }} {{ recipient_address.build }}
-                        {% if recipient_address.build_letter %}
-                        {{ recipient_address.get_build_letter_display }}
-                        {% endif %}
-                        {% if recipient_address.apartment %}
-                        /
-                        {{ recipient_address.apartment }}
-                        {% endif %}
-                    </strong>
-                </div>
                 <div class="card-body px-0 pt-0 pb-2 mt-4">
                     <div class="container-fluid">
-                        <div class="row">
-                        {% for mail in recipient_data %}
-                            {% for item in mail.address_mails.all %}
-                              <div class="col-1 d-flex flex-row">
-                                <div class="list-group" id="list-tab" role="tablist">
-                                  <a class="list-group-item list-group-item-action" id="list-{{ item.track_number }}-list" data-bs-toggle="list" href="#list-{{ item.track_number }}" role="tab" aria-controls="list-{{ item.track_number }}">
-                                      {{ item.track_number }}
-                                  </a>
-                                </div>
-                              </div>
-                            {% endfor %}
-                        {% endfor %}
-                        </div>
-                        {% for mail in recipient_data %}
-                            {% for item in mail.address_mails.all %}
-                                <div class="row">
-                                  <div class="col-12">
-                                    <div class="tab-content" id="nav-tabContent">
-                                      <div class="tab-pane fade" id="list-{{ item.track_number }}" role="tabpanel" aria-labelledby="list-{{ item.track_number }}-list">
-                                          <div class="container-fluid">
-                                              <div class="row mt-3">
-                                                  <div class="col-4">
-                                                      <img src="https://drive.google.com/thumbnail?id={{ item.letter_image_id }}"
-                                                           class="rounded-3"
-                                                           alt="{{ item.track_number }}_image"
-                                                           width="100%"
-                                                      >
-                                                  </div>
-                                                  <div class="col-8">
-                                                      <table class="table-responsive">
-                                                          <tbody>
-                                                            <tr>
-                                                              <th scope="row">
-                                                                  <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
-                                                                   class="w-100 p-3 btn button-light right-angle position-relative"
-                                                                   title="Відстежити"
-                                                                   target="_blank">
-                                                                    <h6 class="mb-0 text-sm">{{ item.track_number }}</h6>
-                                                                </a>
-                                                              </th>
-                                                            </tr>
-                                                            <tr>
-                                                              <td>
-                                                                  <div class="d-flex flex-column justify-content-center" style="margin-left: .8rem">
-                                                                    {% if 0 < item.expired_time and item.expired_time <= 4 %}
-                                                                    <div class="d-flex flex-row">
-                                                                        <div class="bg-warning" style="width: .5rem; height: 1rem"></div>
-                                                                        <strong class="text-xs mb-0" style="margin-left: .1rem">Закінчується термін
-                                                                            збереження листа</strong>
-                                                                    </div>
-                                                                    {% elif item.expired_time == 0 %}
-                                                                    <div class="d-flex flex-row">
-                                                                        <div class="bg-info" style="width: .5rem; height: 1rem"></div>
-                                                                        <strong class="text-xs mb-0" style="margin-left: .1rem">Сьогодні останній
-                                                                            день збереження листа</strong>
-                                                                    </div>
-                                                                    {% elif item.expired_time < 0 %}
-                                                                    <div class="p-2 w-100 bg-dark text-light text-xs mb-0 rounded-2">
-                                                                        <strong>Час збереження листа вичерпано</strong>
-                                                                    </div>
-                                                                    {% endif %}
-                                                                </div>
-                                                              </td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td>
-                                                                {% if item.is_court %}
-                                                                  <h4>
-                                                                      <span class="badge bg-dark text-bg-secondary">Суд, без повістки</span>
-                                                                  </h4>
-                                                                {% endif %}
-
-                                                                {% if item.is_court_subpoena %}
-                                                                  <h4>
-                                                                      <span class="badge bg-dark text-bg-secondary">Суд, з повісткою</span>
-                                                                  </h4>
-                                                                {% endif %}
-
-                                                                {% if item.is_police_fine %}
-                                                                  <h4>
-                                                                      <span class="badge bg-info text-dark">
-                                                                          Поліцейський штраф
-                                                                      </span>
-                                                                  </h4>
-                                                                {% endif %}
-
-                                                                {% if not item.is_court and not item.is_court_subpoena and not item.is_police_fine %}
-                                                                <p class="text-xs font-weight-bold mb-0">Без відміток</p>
-                                                                <p class="text-xs text-secondary mb-0">Звичайний рекомендований лист</p>
-                                                                {% endif %}
-                                                            </td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td>@twitter</td>
-                                                            </tr>
-                                                          </tbody>
-                                                        </table>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>
-                            {% endfor %}
-                        {% endfor %}
-                    </div>
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Фото /
-                                    Номер
-                                    відстеження
-                                </th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Відмітки
-                                </th>
-                                <!--                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Відмітки</th>-->
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Адреса отримувача
-                                </th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    Дати
-                                </th>
-                                <th class="text-secondary opacity-7"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for mail in recipient_data %}
-                                {% for item in mail.address_mails.all %}
-                                    {% include 'dashboard/inc/_mail_item_string.html' %}
-                                {% endfor %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-2 d-flex justify-content-center">
-                            <!-- pagination-->
-                            <nav class="mt-1 mx-auto"
-                                 aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        {% if mails_numbers.has_previous %}
-                                        <a class="page-link"
-                                           href="?page={{ mails_numbers.previous_page.number }}"
-                                           aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                        {% endif %}
-                                    </li>
-                                    {% for page in mails_numbers.paginator.page_range %}
-                                    {% if page > mails_numbers.number|add:-10 and page < mails_numbers.number|add:10 %}
-                                    <li class="page-item"><a class="page-link"
-                                                             href="?page={{ page }}">{{ page }}</a>
-                                    </li>
-                                    {% endif %}
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Фото /
+                                        Номер
+                                        відстеження
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Відмітки
+                                    </th>
+                                    <!--                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Відмітки</th>-->
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Адреса отримувача
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Дати
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for mail in recipient_data %}
+                                    {% for item in mail.address_mails.all %}
+                                        {% include 'dashboard/inc/_mail_item_string.html' %}
                                     {% endfor %}
-                                    {% if mails_numbers.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ mails_numbers.paginator.num_pages }}"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    {% endif %}
-                                    <li class="page-item">
-                                    </li>
-                                </ul>
-                            </nav>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-2 d-flex justify-content-center">
+                                <!-- pagination-->
+                                <nav class="mt-1 mx-auto"
+                                     aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            {% if mails_numbers.has_previous %}
+                                            <a class="page-link"
+                                               href="?page={{ mails_numbers.previous_page.number }}"
+                                               aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                            {% endif %}
+                                        </li>
+                                        {% for page in mails_numbers.paginator.page_range %}
+                                            {% if page > mails_numbers.number|add:-10 and page < mails_numbers.number|add:10 %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="?page={{ page }}">{{ page }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if mails_numbers.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                   href="?page={{ mails_numbers.paginator.num_pages }}"
+                                                   aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        <li class="page-item"></li>
+                                    </ul>
+                                </nav>
                             <!-- /pagination-->
                         </div>
                     </div>
