@@ -1,8 +1,7 @@
-<form action="{% url 'dashboard:results' %}" method="get" class="mx-auto mt-2">
+<form action="{% url 'dashboard:results' %}" method="get" class="mx-auto mt-2 w-75">
     <div class="d-flex flex-row">
         {{ search_form.query }}
-        <button style="border-radius: 15% 15% 0"
-                class="btn button-success my-2 my-sm-0 outline mobile-text rounded-end-5"
+        <button class="btn button-success my-2 p-3 my-sm-0 outline mobile-text right-angle rounded-end-3"
                 type="submit">
             <i class="fas fa-search" aria-hidden="true"></i>
         </button>
