@@ -50,17 +50,23 @@
                 {% for item in wanted_letter %}
                     <div style="background: #fff" class="row mb-1">
                         <div class="col-xl-3 col-sm-3 d-flex flex-row">
-                            {% if 0 < item.expired_time and item.expired_time <= 4 %}
+                            {% if item.expired_time and item.expired_time > 4 %}
+                                <div class="bg-success" style="width: .7rem; height: 100%"></div>
+                            {% elif 0 < item.expired_time and item.expired_time <= 4 %}
                                 <!-- The storage time will expire soon -->
                                 <div class="bg-warning" style="width: .7rem; height: 100%"></div>
-                                {% elif item.expired_time == 0 %}
+                            {% elif item.expired_time == 0 %}
                                 <!-- The las storage day -->
                                 <div class="bg-info" style="width: .7rem; height: 100%"></div>
-                                {% elif item.expired_time < 0 %}
+                            {% elif item.expired_time < 0 %}
                                 <!-- The storage time has been expired -->
                                 <div class="bg-secondary" style="width: .7rem; height: 100%"></div>
                             {% endif %}
-                            {% if 0 < item.expired_time and item.expired_time <= 4 %}
+                            {% if item.expired_time and item.expired_time > 4 %}
+                                <h5 class="text-secondary p-3 my-auto">
+                                    {{ item.expired_time }}
+                                </h5>
+                            {% elif 0 < item.expired_time and item.expired_time <= 4 %}
                                 <h5 class="text-secondary p-3 my-auto">
                                     {{ item.expired_time }}
                                 </h5>
@@ -88,18 +94,24 @@
 
                         <div class="col-xl-3 col-sm-3 d-flex flex-row my-auto">
                             {% if item.is_court %}
-                                <p class="text-xs font-weight-bold mb-0">Суд</p>
-                                <p class="text-xs text-secondary mb-0">Без повістки</p>
+                                <div class="w-100 p-1 bg-info-subtle">
+                                    <p class="text-xs font-weight-bold mb-0">Суд</p>
+                                    <p class="text-xs text-secondary mb-0">Без повістки</p>
+                                </div>
                             {% endif %}
 
                             {% if item.is_court_subpoena %}
-                                <p class="text-xs font-weight-bold mb-0">Суд</p>
-                                <p class="text-xs text-secondary mb-0">З повісткою</p>
+                                <div class="w-100 p-1 bg-info-subtle">
+                                    <p class="text-xs font-weight-bold mb-0">Суд</p>
+                                    <p class="text-xs text-secondary mb-0">З повісткою</p>
+                                </div>
                             {% endif %}
 
                             {% if item.is_police_fine %}
-                                <p class="text-xs font-weight-bold mb-0">Поліцейський штраф</p>
-                                <p class="text-xs text-secondary mb-0">Без повістки</p>
+                                <div class="w-100 p-1 bg-primary-subtle">
+                                    <p class="text-xs font-weight-bold mb-0">Поліцейський штраф</p>
+                                    <p class="text-xs text-secondary mb-0">Без повістки</p>
+                                </div>
                             {% endif %}
 
                             {% if not item.is_court and not item.is_court_subpoena and not item.is_police_fine %}
@@ -129,10 +141,11 @@
 
                         <div style="{% if item.expired_time < 0 %}height: 100%{% endif %}"
                              class="col-xl-1 col-sm-2 d-flex flex-row my-auto {% if item.expired_time < 0 %}p-3 border-0 bg-dark-subtle{% endif %}">
-                            <a class="nav-link disabled" aria-disabled="true">Видано</a>
+
                             {% if item.expired_time >= 0 %}
-                                <span class="badge badge-sm bg-gradient-secondary">Видати</span>
+                                <a class="btn button-gradient-secondary text-light border-0">Видати</a>
                             {% elif item.expired_time < 0 %}
+                                <a class="nav-link disabled" aria-disabled="true">Видано</a>
                             {% endif %}
                         </div>
 
