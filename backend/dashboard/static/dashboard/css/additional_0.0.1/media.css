@@ -1,0 +1,9 @@
+@media screen and (max-width: 768px) {
+    .media-margin-top-1 {
+        margin-top: 1rem;
+    }
+
+    .media-margin-top-2 {
+        margin-top: 2rem;
+    }
+}

@@ -1,0 +1,37 @@
+{% extends 'dashboard/_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        {% include 'accounts/inc/_message.html' %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-xl-12">{{ form.street }}</div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-xl-6">
+                    <p>{{ form.build.label }}</p>
+                    <p>{{ form.build }}</p>
+                </div>
+                <div class="col-xl-6">
+                    <p>{{ form.build_letter.label }}</p>
+                    <p>{{ form.build_letter }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    {{ form.apartment }}
+                </div>
+                <div class="col-xl-6">
+                    {{ form.company_name }}
+                </div>
+            </div>
+            <p>{{ form. }}</p>
+            <p>{{ form. }}</p>
+            <button type="submit" class="btn button-blue right-angle">Додати отримувача</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.shortcuts import render
+from django.contrib.auth import login
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -15,7 +15,7 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, 'Вдалий вхід у кабінет користувача')
-            return HttpResponseRedirect(reverse('dashboard:mail_archive'))
+            return HttpResponseRedirect(reverse('dashboard:search'))
         else:
             messages.info(request, '<strong>Невдала спроба входу!</strong> Можливо, недійсний пароль. '
                                    'Перевірте, чи ввімкнений CapsLock.')
@@ -47,9 +47,4 @@ def admin_login(request):
     }
 
     return render(request, 'accounts/login.html', context=context)
-
-
-def user_logout(request):
-    logout(request)
-    return redirect('accounts:login')
 
