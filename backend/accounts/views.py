@@ -15,7 +15,7 @@ def user_login(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, 'Вдалий вхід у кабінет користувача')
-            return HttpResponseRedirect(reverse('dashboard:search'))
+            return HttpResponseRedirect(reverse('dashboard:mail_archive'))
         else:
             messages.info(request, '<strong>Невдала спроба входу!</strong> Можливо, недійсний пароль. '
                                    'Перевірте, чи ввімкнений CapsLock.')
