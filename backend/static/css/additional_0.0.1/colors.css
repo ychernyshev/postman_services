@@ -57,3 +57,15 @@
 .border-warning {
     border: .1rem solid #FFC107;
 }
+
+.background-gradient-primary {
+    background: linear-gradient(to right, #21C3FD, #206DF9)
+}
+
+.background-gradient-secondary {
+    background: linear-gradient(to right, #9EAECE, #6D7F9D)
+}
+
+.background-gradient-success {
+    background: linear-gradient(to right, #80E02F, #36BC35)
+}
