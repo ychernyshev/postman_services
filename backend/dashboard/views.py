@@ -61,7 +61,7 @@ def simple_search_results(request):
                 'wanted_letter': wanted_letter,
             })
 
-        return render(request, 'dashboard/search_results_alternate.html', context=context)
+        return render(request, 'dashboard/search_results.html', context=context)
 
 
 @login_required(login_url='account:login')
