@@ -11,8 +11,9 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </td>-->
-    <td>
+    <td style="position: relative; height: 8vh">
         <a href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ item.track_number }}"
+           style="position: absolute; top: .55rem"
            class="w-100 p-3 btn button-light right-angle"
            title="Відстежити"
            target="_blank">
@@ -21,21 +22,23 @@
     </td>
     <td>
         {% if 0 < item.expired_time and item.expired_time <= 4 %}
-            <div class="d-flex flex-row">
+            <div style="margin-left: 2vh" class="d-flex flex-row">
                 <div class="bg-warning" style="width: .5rem; height: 1rem"></div>
-                <strong class="text-xs mb-0" style="margin-left: .1rem">Закінчується термін
-                    збереження листа</strong>
+                <strong class="text-xs mb-0" style="margin-left: .1rem">
+                    Закінчується термін збереження листа
+                </strong>
             </div>
         {% elif item.expired_time == 0 %}
-            <div class="d-flex flex-row">
-                <div class="bg-info" style="width: .5rem; height: 1rem"></div>
-                <strong class="text-xs mb-0" style="margin-left: .1rem">Сьогодні останній
-                    день збереження листа</strong>
+            <div style="margin-left: 2vh" class="d-flex flex-row">
+            <div class="bg-info" style="width: .5rem; height: 1rem"></div>
+                <strong class="text-xs mb-0" style="margin-left: .1rem">
+                    Сьогодні останній день збереження листа
+                </strong>
             </div>
         {% elif item.expired_time < 0 %}
-                <div class="w-100 bg-body-tertiary text-xs mb-0">
-                    <strong>Час збереження листа вичерпано</strong>
-                </div>
+            <div style="margin-left: 2vh" class="w-100 bg-body-tertiary text-xs mb-0">
+                <strong>Час збереження листа вичерпано</strong>
+            </div>
         {% endif %}
     </td>
     <td>
@@ -62,8 +65,9 @@
     <!--                    <td class="align-middle text-center text-sm">-->
     <!--                      <span class="badge badge-sm bg-gradient-success">Online</span>-->
     <!--                    </td>-->
-    <td class="align-middle text-center">
+    <td class="align-middle">
         <a href="{% url 'dashboard:recipient_data' item.address.id %}"
+           style="margin-left: 1.5vh"
            class="w-100 text-secondary text-xs font-weight-bold">
             {{ item.address.get_street_display }} {{ item.address.build }}
             {% if item.address.build_letter %}
@@ -75,12 +79,12 @@
             {% endif %}
         </a>
     </td>
-    <td class="align-middle text-center">
-        <span class="text-secondary text-xs font-weight-bold">{{ item.date_of_receipt|date:'d.m.Y' }} - {{ item.expired_date|date:'d.m.Y' }}</span>
+    <td class="align-middle">
+        <span style="margin-left: 1.5vh" class="text-secondary text-xs font-weight-bold">{{ item.date_of_receipt|date:'d.m.Y' }} - {{ item.expired_date|date:'d.m.Y' }}</span>
     </td>
     <td class="align-middle text-center">
         {% if item.expired_time >= 0 %}
-            <span class="badge badge-sm bg-gradient-secondary">Видати</span>
+            <span class="badge badge-sm bg-gradient-secondary rounded-2">Видати</span>
         {% elif item.expired_time < 0 %}
         {% endif %}
     </td>
