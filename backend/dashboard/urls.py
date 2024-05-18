@@ -12,5 +12,6 @@ urlpatterns = [
     path('mail_<str:slug>/update', MailUpdateView.as_view(), name='update_mail'),
     path('add_recipient', add_recipient, name='add_recipient'),
     path('recipient_data/<int:pk>/', recipient_data, name='recipient_data'),
-    path('recipient_<int:pk>/edit', RecipientEditUpdateView.as_view(), name='recipient_edit')
+    path('recipient_<int:pk>/edit', RecipientEditUpdateView.as_view(), name='recipient_edit'),
+    path('<str:slug>/f22-a', form22a, name='f22-a'),
 ]

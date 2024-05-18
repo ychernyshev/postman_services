@@ -177,3 +177,14 @@ def recipient_data(request, pk=None):
     }
 
     return render(request, 'dashboard/recipient_data.html', context=context)
+
+
+def form22a(request, slug=None):
+    form_item = MailItemModel.objects.filter(slug=slug)
+
+    context = {
+        'title': 'Форма 22-а',
+        'form_item': form_item,
+    }
+
+    return render(request, 'dashboard/forms/f22-a.html', context=context)

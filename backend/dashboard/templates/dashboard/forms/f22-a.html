@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <!-- Nucleo Icons -->
+    <link href="{% static 'dashboard/assets/css/nucleo-icons.css' %}" type="text/css"/>
+    <link href="{% static 'dashboard/assets/css/nucleo-svg.css' %}" type="text/css"/>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link id="pagestyle" href="{% static 'dashboard/assets/css/soft-ui-dashboard.min.css' %}" rel="stylesheet" />
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static 'dashboard/css/additional_0.0.1/style.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/additional_0.0.1/colors.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/additional_0.0.1/buttons.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/additional_0.0.1/media.css' %}">
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
+        <div class="container-fluid">
+            <div class="row">
+                <!--                    <a href="" class="btn bg-gradient-success rounded-2">Роздрукувати</a>-->
+                <div class="col-xxl-11 col-sm-6">
+                    <img src="{% static 'dashboard/images/Ukrposhta-mini-logo.png' %}" alt="" width="150">
+                </div>
+                <div class="col-xxl-1 col-sm-6 text-end">
+                        ф.22-а
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-2 col-sm-3 text-end">
+                   Шановний клієнте
+                </div>
+                <div class="col-xxl-10 col-sm-9">
+                   <hr>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-5">
+                    Вам надійшло поштове відправлення
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-2">
+                    <input type="checkbox" name="" id="1"> Просте
+                </div>
+                <div class="col-3">
+                    <input type="checkbox" name="" id="2" checked> Рекомендоване
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-7">
+                    одержати його ви можете у відділенні поштового зв'язку за адресою:
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div style="position: relative" class="col-12">
+                    <span style="position: fixed; top: 33vh; left: 20vh" class="bold text-4">Стрийська 115В</span>
+                    <hr style="margin-top: 5vh">
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 d-flex flex-row">
+                    <span>ми працюємо з</span>
+                    <div style="position: relative" class="col-1">
+                        <span style="position: fixed; top: 41vh; left: 29.5vh" class="bold text-4">9</span>
+                        <hr style="margin-top: 5vh">
+                    </div>
+                    <span>до</span>
+                    <div style="position: relative" class="col-1">
+                        <span style="position: fixed; top: 41vh; left: 45vh" class="bold text-4">19</span>
+                        <hr style="margin-top: 5vh">
+                    </div>
+                    <span>перерва</span>
+                    <div style="position: relative" class="col-3">
+                        <hr style="margin-top: 5vh">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 d-flex flex-row">
+                    <span>телефонуйте, якщо виникли питання</span>
+                    <div style="position: relative" class="col-4">
+                        <hr style="margin-top: 5vh">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <span>для одержання рекомендованого відправлення потрібно пред'явити документ, що посвідчує особу.</span>
+                </div>
+                <div class="col-12">
+                    <span>одержати відправлення може повнолітній член родини (за документом, що посвідчує родини зв'язки)</span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <small>ви можете замовити доставку відправлення додому</small>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <span>за телефоном: </span>
+                    <div style="position: relative" class="col-4">
+                        <hr style="margin-top: 5vh">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-8">
+                    <p>ДО ЗУСТРІЧІ.</p>
+                    <p>УКРПОШТА</p>
+                </div>
+                <div class="col-4 text-center">
+                    <hr class="w-75">
+                    <small>дата вкладання повідомлення до абонентської скриньки</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'dashboard/assets/js/core/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'dashboard/assets/js/plugins/chartjs.min.js' %}"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
