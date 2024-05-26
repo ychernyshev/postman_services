@@ -16,6 +16,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/MailArchive.vue"),
   },
+  
 ];
 
 const router = createRouter({
