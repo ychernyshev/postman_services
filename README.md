@@ -60,5 +60,8 @@ yarn serve
 yarn build
 ```
 
+### Project preview
+![postman_services-edd_entry.png](backend/static/images/postman_services-edd_entry.png)
+
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
